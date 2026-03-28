@@ -4,10 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BaclEndApplication {
-
+public class BackEndApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(BaclEndApplication.class, args);
+		SpringApplication.run(BackEndApplication.class, args);
 	}
-
 }

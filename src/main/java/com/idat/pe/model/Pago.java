@@ -4,9 +4,12 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -18,17 +21,19 @@ public class Pago {
 	@Column(name = "id_pago")
 	private int id_pago;
 	@ManyToOne
+	@JoinColumn(name = "id_pedido")
 	private Pedidos pedido;
 	@ManyToOne
+	@JoinColumn(name = "id_usuario")
 	private Usuarios usuario;
 	private float precio;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "metodo_pago")
 	private MetodoPago metodoPago;
 	private String estado;
 	private java.util.Date fechaPago;
 	
-	public Pago() {
-		// TODO Auto-generated constructor stub
-	}
+	public Pago() {}
 
 	public Pago(int id_pago, Pedidos pedido, Usuarios usuario, float precio, MetodoPago metodoPago, String estado,
 			Date fechaPago) {

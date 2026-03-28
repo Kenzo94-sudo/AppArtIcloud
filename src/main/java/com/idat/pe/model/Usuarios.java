@@ -17,10 +17,13 @@ public class Usuarios {
 	@Column(name = "id_usuario")
 	private int id_usuario;
 	private String nombre;
+	@Column(unique = true)
 	private String password;
 	@Column(unique = true)
 	private String email;
+	@Column(unique = true)
 	private String direccion;
+	@Column(unique = true)
 	private int telefono;
 	private java.util.Date Fecharegistro;
 	
@@ -92,9 +95,5 @@ public class Usuarios {
 
 	public void setFecharegistro(java.util.Date fecharegistro) {
 		Fecharegistro = fecharegistro;
-	}
-
-	
-		
-	
+	}	
 }

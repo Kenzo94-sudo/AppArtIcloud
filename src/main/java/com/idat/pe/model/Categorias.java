@@ -13,26 +13,25 @@ public class Categorias {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria")
-	private int id_categoria;
+	private Integer id_categoria;
 	private String nombre;
-	private String descripcion:
+	@Column(columnDefinition = "TEXT")
+	private String descripcion;
 		
-		public Categorias() {
-			// TODO Auto-generated constructor stub
-		}
+		public Categorias() {}
 
-		public Categorias(int id_categoria, String nombre, String descripcion) {
+		public Categorias(Integer id_categoria, String nombre, String descripcion) {
 			super();
 			this.id_categoria = id_categoria;
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 		}
 
-		public int getId_categoria() {
+		public Integer getId_categoria() {
 			return id_categoria;
 		}
 
-		public void setId_categoria(int id_categoria) {
+		public void setId_categoria(Integer id_categoria) {
 			this.id_categoria = id_categoria;
 		}
 
@@ -50,9 +49,5 @@ public class Categorias {
 
 		public void setDescripcion(String descripcion) {
 			this.descripcion = descripcion;
-		}
-
-		
-	
-		
+		}	
 }

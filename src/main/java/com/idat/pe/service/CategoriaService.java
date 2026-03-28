@@ -28,7 +28,8 @@ public class CategoriaService {
 		.orElseThrow( () -> new AttributeNotFoundException("Categoria no encontrada:" + id));
 	}
 	
-	public Categorias guardar(Categorias c) { return repository.save(c);}
+	public Categorias guardar(Categorias c) 
+	{ return repository.save(c);}
 	
 	public Categorias actualizar(int id, Categorias datos) throws AttributeNotFoundException {
 		Categorias c = buscarPorId(id);

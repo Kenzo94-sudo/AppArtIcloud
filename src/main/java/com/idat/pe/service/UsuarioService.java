@@ -31,10 +31,8 @@ public class UsuarioService {
 		return repository.findByEmail(email);
 	}
 	
-	public Usuarios guardar(Usuarios u) {
-		if(repository.existsByEmail(u.getEmail())) throw new
-		RuntimeException("El email ya esta registrado");
-		return repository.save(u);
+	public Usuarios guardarUsuario(Usuarios usuario) {
+		return repository.save(usuario);
 	}
 	
 	public Usuarios actualizar(int id_usuario, Usuarios datos) throws AttributeNotFoundException {
@@ -48,7 +46,7 @@ public class UsuarioService {
 		return repository.save(u);
 	}
 	
-	public void elimninar(int id) throws AttributeNotFoundException {
+	public void eliminar(int id) throws AttributeNotFoundException {
 		buscarPorId(id);
 		repository.deleteById(id);
 	}

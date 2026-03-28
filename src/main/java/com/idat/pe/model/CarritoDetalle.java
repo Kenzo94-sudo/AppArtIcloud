@@ -18,7 +18,7 @@ public class CarritoDetalle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_detalle")
 	private int id_detalle;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_carrito")
 	private Carrito carrito;

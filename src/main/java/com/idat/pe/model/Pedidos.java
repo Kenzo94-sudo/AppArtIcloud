@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class Pedidos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "id_pedido")
 	private int id_pedidos;
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")

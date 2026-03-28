@@ -18,21 +18,23 @@ public class Obras {
 	@Column(name = "id_obra")
 	private int id_obra;
 	private String titulo;
+	@Column(columnDefinition = "TEXT")
 	private String descripcion;
 	private float precio;
 	private int stock;
 	private String image_url;
+	@Column(name = "fecha_creacion")
 	private java.util.Date fechaCreacion;
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
-	private int id_categoria;
+	private Categorias categoria;
 	
 	public Obras() {
 		
 	}
 
 	public Obras(int id_obra, String titulo, String descripcion, float precio, int stock, String image_url,
-			Date fechaCreacion, int id_categoria) {
+			Date fechaCreacion, Categorias categoria) {
 		super();
 		this.id_obra = id_obra;
 		this.titulo = titulo;
@@ -41,7 +43,7 @@ public class Obras {
 		this.stock = stock;
 		this.image_url = image_url;
 		this.fechaCreacion = fechaCreacion;
-		this.id_categoria = id_categoria;
+		this.categoria = categoria;
 	}
 
 	public int getId_obra() {
@@ -100,16 +102,12 @@ public class Obras {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public int getId_categoria() {
-		return id_categoria;
+	public Categorias getCategoria() {
+		return categoria;
 	}
 
-	public void setId_categoria(int id_categoria) {
-		this.id_categoria = id_categoria;
+	public void setCategoria(Categorias categoria) {
+		this.categoria = categoria;
 	}
 
-	
-	
-	
-	
 }

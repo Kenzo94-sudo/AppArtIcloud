@@ -3,6 +3,8 @@ package com.idat.pe.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.management.AttributeNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.idat.pe.model.Usuarios;
@@ -17,24 +19,24 @@ public class AuthService {
         this.repository = repository;
     }
 
-    public Map<String, Object> login(String email, String password) {
+    public Map<String, Object> login(String email, String password) throws AttributeNotFoundException {
         Usuarios usuario = repository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+                .orElseThrow(() -> new AttributeNotFoundException("Usuario no encontrado"));
 
         if (!usuario.getPassword().equals(password))
             throw new RuntimeException("Contraseña incorrecta");
 
         Map<String, Object> respuesta = new HashMap<>();
-        respuesta.put("idUsuario", usuario.getIdUsuario());
+        respuesta.put("idUsuario", usuario.getId_usuario());
         respuesta.put("nombre", usuario.getNombre());
         respuesta.put("email", usuario.getEmail());
         respuesta.put("mensaje", "Login exitoso");
         return respuesta;
     }
 
-    public Map<String, Object> recuperarPassword(String email) {
-        Usuario usuario = repository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Email no registrado"));
+    public Map<String, Object> recuperarPassword(String email) throws AttributeNotFoundException {
+        Usuarios usuario = repository.findByEmail(email)
+                .orElseThrow(() -> new AttributeNotFoundException("Email no registrado"));
 
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("mensaje", "Se enviaron instrucciones al correo: " + email);

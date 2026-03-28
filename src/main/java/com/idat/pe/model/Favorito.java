@@ -13,24 +13,23 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "favoritos",   uniqueConstraints = @UniqueConstraint(columnNames = {"id_usuario", "id_obra"})))
+@Table(name = "favoritos",
+uniqueConstraints = @UniqueConstraint(columnNames = {"id_usuario", "id_obra"}))
 public class Favorito {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column
+		@Column(name = "id_favorito")
 		private int id_favorito;
 		@ManyToOne
-		@JoinColumn
+		@JoinColumn(name = "id_usuario")
 		private Usuarios usuario;
 		@ManyToOne
-		@JoinColumn
+		@JoinColumn(name = "id_obra")
 		private Obras obra;
 		private java.util.Date fecha;
 		
-		public Favorito() {
-			// TODO Auto-generated constructor stub
-		}
+		public Favorito() {}
 
 		public Favorito(int id_favorito, Usuarios usuario, Obras obra, Date fecha) {
 			super();
