@@ -6,14 +6,15 @@ import java.util.Map;
 import javax.management.AttributeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.server.Http2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.idat.pe.model.Pedidos;
 import com.idat.pe.service.PedidoService;
@@ -38,7 +39,7 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/usuario/{id_usuario}")
-	public ResponseEntity<Pedidos> listarPorUsuario(@PathVariable int id_usuario) throws AttributeNotFoundException{
+	public ResponseEntity<Pedidos> listarPorUsuario(@RequestParam int id_usuario) throws AttributeNotFoundException{
 		Pedidos usuario = service.buscarPorId(id_usuario);
 		return ResponseEntity.ok(usuario);
 	}
@@ -49,9 +50,15 @@ public class PedidoController {
 	}
 	
 	@PutMapping("/actualizar")
-	public ResponseEntity<Pedidos> actualizarPedido(@PathVariable int id_pedido, Pedidos datos){
-
+	public ResponseEntity<Pedidos> actualizarPedido(@PathVariable int id_pedido,@RequestParam Pedidos datos) throws AttributeNotFoundException{
+		Pedidos pedidoActualizar = service.actualizar(id_pedido, datos);
+		return ResponseEntity.ok(pedidoActualizar);
+	}
 	
+	@DeleteMapping("/eliminar({id_pedido}")
+	public ResponseEntity<Void> eliminarPedido(@PathVariable int id_pedido) throws AttributeNotFoundException {
+		service.eliminar(id_pedido);
+		return ResponseEntity.noContent().build();
 	}
 }
 	

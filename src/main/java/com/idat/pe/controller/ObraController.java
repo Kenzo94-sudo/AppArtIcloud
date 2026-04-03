@@ -36,7 +36,7 @@ public class ObraController {
 	}
 	
 	@GetMapping("/categoria({id_categoria}")
-	public ResponseEntity<List<Obras>> buscarrPorCategoria(@RequestParam int id_categoria) throws AttributeNotFoundException{
+	public ResponseEntity<List<Obras>> buscarPorCategoria(@RequestParam int id_categoria) throws AttributeNotFoundException{
 		List<Obras> obra = service.listarPorCategoria(id_categoria);
 		return ResponseEntity.ok(obra);
 	}

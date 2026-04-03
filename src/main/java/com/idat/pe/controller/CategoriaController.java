@@ -37,7 +37,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/guardar")
-	public ResponseEntity<Categorias> guardarUsuario(@PathVariable Categorias id_categoria) throws AttributeNotFoundException{
+	public ResponseEntity<Categorias> guardarCategoria(@PathVariable Categorias id_categoria) throws AttributeNotFoundException{
 		Categorias categoria = service.guardar(id_categoria);
 		return ResponseEntity.ok(categoria);
 	}

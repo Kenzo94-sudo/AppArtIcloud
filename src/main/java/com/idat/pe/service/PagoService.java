@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.idat.pe.model.MetodoPago;
@@ -14,8 +15,11 @@ import com.idat.pe.repository.PagoRepository;
 
 @Service
 public class PagoService {
+	@Autowired
 	private final PagoRepository repository;
+	@Autowired
 	private final PedidoService pedidoService;
+	@Autowired
 	private final UsuarioService usuarioService;
 	
 	
@@ -56,6 +60,7 @@ public class PagoService {
 	public Pago buscarPorPedido(int id_pedido) throws AttributeNotFoundException {
 		return repository.findByPedidoIdPedido(id_pedido).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado para pedido:" + id_pedido));
 		}
+	
 }
 
 

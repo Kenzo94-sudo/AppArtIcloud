@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.idat.pe.model.Categorias;
@@ -12,7 +13,9 @@ import com.idat.pe.repository.ObraRepository;
 
 @Service
 public class ObraService {
+	@Autowired
 	private final ObraRepository repository;
+	@Autowired
 	private final CategoriaService categoriaService;
 	
 	public ObraService(ObraRepository repository, CategoriaService categoriaService) {

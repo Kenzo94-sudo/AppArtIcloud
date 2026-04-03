@@ -18,20 +18,20 @@ public class PedidoDetalle {
 	private int id_detalle;
 	@OneToOne
 	@JoinColumn(name = "id_pedido")
-	private int id_pedido;
+	private Pedidos pedido;
 	@OneToOne
 	@JoinColumn(name = "id_obra")
-	private int id_obra;
+	private Obras obra;
 	private int cantidad;
 	private float precio;
 	
 	public PedidoDetalle() {}
 
-	public PedidoDetalle(int id_detalle, int id_pedido, int id_obra, int cantidad, float precio) {
+	public PedidoDetalle(int id_detalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
 		super();
 		this.id_detalle = id_detalle;
-		this.id_pedido = id_pedido;
-		this.id_obra = id_obra;
+		this.pedido = pedido;
+		this.obra = obra;
 		this.cantidad = cantidad;
 		this.precio = precio;
 	}
@@ -44,20 +44,20 @@ public class PedidoDetalle {
 		this.id_detalle = id_detalle;
 	}
 
-	public int getId_pedido() {
-		return id_pedido;
+	public Pedidos getPedido() {
+		return pedido;
 	}
 
-	public void setId_pedido(int id_pedido) {
-		this.id_pedido = id_pedido;
+	public void setPedido(Pedidos pedido) {
+		this.pedido = pedido;
 	}
 
-	public int getId_obra() {
-		return id_obra;
+	public Obras getObra() {
+		return obra;
 	}
 
-	public void setId_obra(int id_obra) {
-		this.id_obra = id_obra;
+	public void setObra(Obras obra) {
+		this.obra = obra;
 	}
 
 	public int getCantidad() {

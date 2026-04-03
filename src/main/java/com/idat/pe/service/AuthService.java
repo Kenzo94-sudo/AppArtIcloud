@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.management.AttributeNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.idat.pe.model.Usuarios;
@@ -12,7 +13,7 @@ import com.idat.pe.repository.UsuarioRepository;
 
 @Service
 public class AuthService {
-
+	@Autowired
     private final UsuarioRepository repository;
 
     public AuthService(UsuarioRepository repository) {
