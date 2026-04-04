@@ -10,6 +10,6 @@ import com.idat.pe.model.CarritoDetalle;
 
 @Repository
 public interface CarritoDetalleRepository extends JpaRepository<CarritoDetalle, Integer> {
-	Optional<CarritoDetalle> findByCarritoIdCarrito(Integer id_carrito);
-	void deleteByCarritoIdCarrito(Integer id_carrito);
+	Optional<CarritoDetalle> findByCarrito_idCarrito(Integer idCarrito);
+	void deleteByCarrito_idCarrito(Integer idCarrito);
 }

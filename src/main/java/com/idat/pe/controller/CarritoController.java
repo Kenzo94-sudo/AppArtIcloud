@@ -15,36 +15,36 @@ import com.idat.pe.model.Carrito;
 import com.idat.pe.service.CarritoService;
 
 @RestController
-@RequestMapping("/api/Carrito")
+@RequestMapping("/api/carrito")
 public class CarritoController {
 	
 		@Autowired
 		private CarritoService service;
 		
-		@GetMapping("/usuario")
+		@GetMapping("/listar")
 		public List<Carrito> listar()
 		{
 			return service.listar();
 		}
 		
-		@GetMapping("/usuario/{id_carrito}")
-		public ResponseEntity<Carrito> listarPorId(@PathVariable int id_carrito)
+		@GetMapping("/listar/{idCarrito}")
+		public ResponseEntity<Carrito> listarPorId(@PathVariable int idCarrito)
 		{
-			Carrito buscarId = service.buscarPorId(id_carrito);
-			return ResponseEntity.ok(buscarId);
+			Carrito buscarIdCarrito = service.buscarPorId(idCarrito);
+			return ResponseEntity.ok(buscarIdCarrito);
 		}
 		
-		@GetMapping("/usuario/{id_usuario}")
-		public ResponseEntity<Carrito> listarPorUsuario(@PathVariable int id_usuario)
+		@GetMapping("/listar/{idUsuario}")
+		public ResponseEntity<Carrito> listarPorUsuario(@PathVariable int idUsuario)
 		{
-			Carrito buscarUsuario = service.buscarPorUsuario(id_usuario);
+			Carrito buscarUsuario = service.buscarPorUsuario(idUsuario);
 			return ResponseEntity.ok(buscarUsuario);
 		}
 		
-		@GetMapping("/usuario/{íd_usuario}")
-		public ResponseEntity<Carrito> obtener(@PathVariable int id_usuario)
+		@GetMapping("/listar/carrito/{idUsuario}")
+		public ResponseEntity<Carrito> obtener(@PathVariable int idUsuario)
 		{
-			return ResponseEntity.ok(service.obtenerOCrear(id_usuario));
+			return ResponseEntity.ok(service.obtenerOCrear(idUsuario));
 		}
 		
 		
@@ -56,10 +56,10 @@ public class CarritoController {
 		}
 		
 		
-		@DeleteMapping("/eliminar")
-		public ResponseEntity<Void> eliminar(int id)
+		@DeleteMapping("/eliminar/{idCarrito}")
+		public ResponseEntity<String> eliminar(int idCarrito)
 		{
-			service.eliminar(id);
-			return ResponseEntity.noContent().build();
+			service.eliminar(idCarrito);
+			return ResponseEntity.ok("LA COMPRA CON EL ID" + idCarrito + "HA SIDO ELIMINADO EXITOSAMENTE");
 		}
 }

@@ -25,20 +25,19 @@ public class ObraService {
 	
 	public List<Obras> listar() { return repository.findAll();}
 	
-	public Obras buscarPorId(int id) throws AttributeNotFoundException {
-		return repository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Obra no encontrada:" + id));}
+	public Obras buscarPorId(int idObra) throws AttributeNotFoundException {
+		return repository.findById(idObra).orElseThrow(() -> new AttributeNotFoundException("Obra no encontrada:" + idObra));}
 	
-
-	public List<Obras> listarPorCategoria(int id_categoria){
-		return repository.findByCategoriaIdCategoria(id_categoria);
+	public List<Obras> listarPorCategoria(int idCategoria){
+		return repository.findByCategoria_idCategoria(idCategoria);
 		}
 	
 	public List<Obras> buscarPorTitulo(String titulo) {
 		return repository.findByTituloContainingIgnoreCase(titulo);
 	}
 	
-	public List<Obras> filtrarPorPrecio(float min, float max){
-		return repository.findByPrecioBetween(min, max);}
+	public List<Obras> filtrarPorPrecio(float precio){
+		return repository.findByPrecio(precio);}
 		
 	public Obras guardar(Obras o) throws AttributeNotFoundException {
 
@@ -56,21 +55,21 @@ public class ObraService {
 	    return repository.save(o);
 	}
 	
-	public Obras actualizar(int id_obra, Obras datos) throws AttributeNotFoundException {
-		Obras obra = buscarPorId(id_obra);
-		obra.setId_obra(datos.getId_obra());
-		obra.setTitulo(datos.getTitulo());
-		obra.setPrecio(datos.getPrecio());
-		obra.setStock(datos.getStock());
-		obra.setImage_url(datos.getImage_url());
-		obra.setFechaCreacion(datos.getFechaCreacion());
-		obra.setDescripcion(datos.getDescripcion());
-		return repository.save(obra);
+	public Obras actualizar(int idObra, Obras obraDatos) throws AttributeNotFoundException {
+		Obras obraActualizar = buscarPorId(idObra);
+		obraActualizar.setId_obra(obraDatos.getId_obra());
+		obraActualizar.setTitulo(obraDatos.getTitulo());
+		obraActualizar.setPrecio(obraDatos.getPrecio());
+		obraActualizar.setStock(obraDatos.getStock());
+		obraActualizar.setImage_url(obraDatos.getImage_url());
+		obraActualizar.setFechaCreacion(obraDatos.getFechaCreacion());
+		obraActualizar.setDescripcion(obraDatos.getDescripcion());
+		return repository.save(obraActualizar);
 	}
 	
-	public void eliminar(int id_obra) throws AttributeNotFoundException {
-		buscarPorId(id_obra);
-		repository.deleteById(id_obra);	}
+	public void eliminar(int idObra) throws AttributeNotFoundException {
+		buscarPorId(idObra);
+		repository.deleteById(idObra);	}
 	
 	}
 	

@@ -2,6 +2,10 @@ package com.idat.pe.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +18,8 @@ import jakarta.persistence.Table;
 public class Usuarios {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
-	private int id_usuario;
+	@Column(name = "idUsuario")
+	private int idUsuario;
 	private String nombre;
 	@Column(unique = true)
 	private String password;
@@ -25,28 +29,31 @@ public class Usuarios {
 	private String direccion;
 	@Column(unique = true)
 	private int telefono;
-	private java.util.Date Fecharegistro;
+	@Column(name = "fechaRegistro")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private Date fechaRegistro;
 	
 	public Usuarios() {}
 
-	public Usuarios(int id_usuario, String nombre, String password, String email, String direccion, int telefono,
-			Date fecharegistro) {
+	public Usuarios(int idUsuario, String nombre, String password, String email, String direccion, int telefono,
+			Date fechaRegistro) {
 		super();
-		this.id_usuario = id_usuario;
+		this.idUsuario = idUsuario;
 		this.nombre = nombre;
 		this.password = password;
 		this.email = email;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		Fecharegistro = fecharegistro;
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public int getId_usuario() {
-		return id_usuario;
+		return idUsuario;
 	}
 
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId_usuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNombre() {
@@ -89,11 +96,11 @@ public class Usuarios {
 		this.telefono = telefono;
 	}
 
-	public java.util.Date getFecharegistro() {
-		return Fecharegistro;
+	public Date getfechaRegistro() {
+		return fechaRegistro;
 	}
 
-	public void setFecharegistro(java.util.Date fecharegistro) {
-		Fecharegistro = fecharegistro;
+	public void setfechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}	
 }

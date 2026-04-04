@@ -2,6 +2,10 @@ package com.idat.pe.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,28 +21,31 @@ import jakarta.persistence.Table;
 public class Carrito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_carrito" )
-	private int id_carrito;
+	@Column(name = "idCarrito" )
+	private int idCarrito;
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "fkUsuario")
 	private Usuarios usuario;
-	private java.util.Date fechaCompra;
+	@Column(name = "fechaRegistro")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private Date fechaCompra;
 	
 	public Carrito() {}
 
-	public Carrito(int id_carrito, Usuarios usuario, Date fechaCompra) {
+	public Carrito(int idCarrito, Usuarios usuario, Date fechaCompra) {
 		super();
-		this.id_carrito = id_carrito;
+		this.idCarrito = idCarrito;
 		this.usuario = usuario;
 		this.fechaCompra = fechaCompra;
 	}
 
 	public int getId_carrito() {
-		return id_carrito;
+		return idCarrito;
 	}
 
-	public void setId_carrito(int id_carrito) {
-		this.id_carrito = id_carrito;
+	public void setId_carrito(int idCarrito) {
+		this.idCarrito = idCarrito;
 	}
 
 	public Usuarios getUsuario() {

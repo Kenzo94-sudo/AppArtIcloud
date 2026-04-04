@@ -9,7 +9,7 @@ import com.idat.pe.model.Obras;
 
 @Repository
 public interface ObraRepository extends JpaRepository<Obras, Integer> {
-	List<Obras> findByCategoriaIdCategoria(Integer id_categoria);
+	List<Obras> findByCategoria_idCategoria(Integer idCategoria);
 	List<Obras> findByTituloContainingIgnoreCase(String titulo);
-	List<Obras> findByPrecioBetween(float min, float max);
+	List<Obras> findByPrecio(float precio);
 }

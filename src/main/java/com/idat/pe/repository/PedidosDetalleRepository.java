@@ -9,5 +9,5 @@ import com.idat.pe.model.PedidoDetalle;
 
 @Repository
 public interface PedidosDetalleRepository extends JpaRepository<PedidoDetalle, Integer>{
-	List<PedidoDetalle> findByPedidoIdPedido (Integer id_pedido);
+	List<PedidoDetalle> findByPedido_idPedido (Integer idPedido);
 }

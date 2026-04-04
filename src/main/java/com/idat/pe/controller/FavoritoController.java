@@ -22,7 +22,7 @@ public class FavoritoController {
 		@Autowired
 		private FavoritoService service;
 		
-		@GetMapping
+		@GetMapping("/listar")
 		public List<Favorito> listarFavorito()
 		{
 			return service.listar();
@@ -34,10 +34,10 @@ public class FavoritoController {
 			return service.guardarFavorito(favorito);
 		}
 		
-		@DeleteMapping("/eliminar/{id_favorito}")
-		public ResponseEntity<Void> eliminarFavorito(@PathVariable int id_favorito)
+		@DeleteMapping("/eliminar/{idFavorito}")
+		public ResponseEntity<String> eliminarFavorito(@PathVariable int idFavorito)
 		{
-			service.eliminarFavorito(id_favorito);
-			return ResponseEntity.noContent().build();
+			service.eliminarFavorito(idFavorito);
+			return ResponseEntity.ok("LA OBRA FAVORITA" +idFavorito + "HA SIDO ELIMINADO EXITOSAMENTE");
 		}
 }

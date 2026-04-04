@@ -24,37 +24,37 @@ public class CarritoDetalleService {
 			return repository.findAll();
 		}
 		
-		public CarritoDetalle buscarPorId(int id_detalle) 
+		public CarritoDetalle buscarPorId(int idCarritoDetalle) 
 		{
-			return repository.findById(id_detalle)
+			return repository.findById(idCarritoDetalle)
 					.orElseThrow(() -> new RuntimeException
-					("Detalle no encontrado:" + id_detalle));}
+					("Detalle no encontrado:" + idCarritoDetalle));}
 		
-		public CarritoDetalle listarPorCarrito(Integer id_carrito)
+		public CarritoDetalle listarPorCarrito(Integer idCarrito)
 		{
-			return repository.findByCarritoIdCarrito(id_carrito)
+			return repository.findByCarrito_idCarrito(idCarrito)
 					.orElseThrow(() -> new RuntimeException
-					("Carrito no encontrado:"+ id_carrito));
+					("Carrito no encontrado:"+ idCarrito));
 		}
 		
 		public CarritoDetalle guardarDetalle(CarritoDetalle carritoDetalle) {
 			return repository.save(carritoDetalle);
 		}
 		
-		public CarritoDetalle actualizar(int id_detalle, CarritoDetalle datos) 
+		public CarritoDetalle actualizar(int idCarritoDetalle, CarritoDetalle carritoDatos) 
 		{
-			CarritoDetalle c = buscarPorId(id_detalle);
-			c.setId_detalle(datos.getId_detalle());
-			c.setCarrito(datos.getCarrito());
-			c.setObras(datos.getObras());
-			c.setPrecio(datos.getPrecio());
-			c.setCantidad(datos.getCantidad());
-			return repository.save(c);
+			CarritoDetalle carritoActualizar = buscarPorId(idCarritoDetalle);
+			carritoActualizar.setId_detalle(carritoDatos.getId_detalle());
+			carritoActualizar.setCarrito(carritoDatos.getCarrito());
+			carritoActualizar.setObras(carritoDatos.getObras());
+			carritoActualizar.setPrecio(carritoDatos.getPrecio());
+			carritoActualizar.setCantidad(carritoDatos.getCantidad());
+			return repository.save(carritoActualizar);
 		}
 		
-		public void eliminar(int id_detalle) {
-			buscarPorId(id_detalle);
-			repository.deleteById(id_detalle);
+		public void eliminar(int idCarritoDetalle) {
+			buscarPorId(idCarritoDetalle);
+			repository.deleteById(idCarritoDetalle);
 		}
 		
 		

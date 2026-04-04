@@ -2,6 +2,10 @@ package com.idat.pe.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,25 +20,26 @@ import jakarta.persistence.Table;
 public class Pedidos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pedido")
-	private int id_pedidos;
+	@Column(name = "fkPedido")
+	private int idPedido;
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "fkUsuario")
 	private Usuarios usuario;
 	@ManyToOne
-	@JoinColumn(name = "id_obra")
+	@JoinColumn(name = "fkObra")
 	private Obras obra;
-	private java.util.Date fechaPedido;
+	@Column(name = "fechaRegistro")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private Date fechaPedido;
 	private float total;
 	private String estado;
 	
-	public Pedidos() {
-		// TODO Auto-generated constructor stub
-	}
+	public Pedidos() {}
 
-	public Pedidos(int id_pedidos, Usuarios usuario, Obras obra, Date fechaPedido, float total, String estado) {
+	public Pedidos(int idPedido, Usuarios usuario, Obras obra, Date fechaPedido, float total, String estado) {
 		super();
-		this.id_pedidos = id_pedidos;
+		this.idPedido = idPedido;
 		this.usuario = usuario;
 		this.obra = obra;
 		this.fechaPedido = fechaPedido;
@@ -43,11 +48,11 @@ public class Pedidos {
 	}
 
 	public int getId_pedidos() {
-		return id_pedidos;
+		return idPedido;
 	}
 
-	public void setId_pedidos(int id_pedidos) {
-		this.id_pedidos = id_pedidos;
+	public void setId_pedidos(int idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public Usuarios getUsuario() {

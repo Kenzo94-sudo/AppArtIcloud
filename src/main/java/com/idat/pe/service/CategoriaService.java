@@ -1,7 +1,6 @@
 package com.idat.pe.service;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import javax.management.AttributeNotFoundException;
 
@@ -24,24 +23,24 @@ public class CategoriaService {
 		return repository.findAll();
 	}
 	
-	public Categorias buscarPorId(int id) throws AttributeNotFoundException {
-		return repository.findById(id)
-		.orElseThrow( () -> new AttributeNotFoundException("Categoria no encontrada:" + id));
+	public Categorias buscarPorId(int idCategoria) throws AttributeNotFoundException {
+		return repository.findById(idCategoria)
+		.orElseThrow( () -> new AttributeNotFoundException("Categoria no encontrada:" + idCategoria));
 	}
 	
-	public Categorias guardar(Categorias c) 
-	{ return repository.save(c);}
+	public Categorias guardar(Categorias categoria) 
+	{ return repository.save(categoria);}
 	
-	public Categorias actualizar(int id, Categorias datos) throws AttributeNotFoundException {
-		Categorias c = buscarPorId(id);
-		c.setNombre(datos.getNombre());
-		c.setDescripcion(datos.getDescripcion());
-		return repository.save(c);
+	public Categorias actualizar(int idCategoria, Categorias categoriaDatos) throws AttributeNotFoundException {
+		Categorias categoriaActualizar = buscarPorId(idCategoria);
+		categoriaActualizar.setNombre(categoriaDatos.getNombre());
+		categoriaActualizar.setDescripcion(categoriaDatos.getDescripcion());
+		return repository.save(categoriaActualizar);
 	}
 	
-	public void eliminar(int id) throws AttributeNotFoundException {
-		buscarPorId(id);
-		repository.deleteById(id);
+	public void eliminar(int idCategoria) throws AttributeNotFoundException {
+		buscarPorId(idCategoria);
+		repository.deleteById(idCategoria);
 	}
 	
 }

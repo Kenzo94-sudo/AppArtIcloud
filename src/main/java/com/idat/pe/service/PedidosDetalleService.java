@@ -24,26 +24,26 @@ public class PedidosDetalleService {
 		return repository.findAll();
 	}
 	
-	public PedidoDetalle buscarPorId(int id_detalle) throws AttributeNotFoundException {
-		return repository.findById(id_detalle).orElseThrow(() -> new AttributeNotFoundException ("Detalle del Pedido no encontrado:" + id_detalle));
+	public PedidoDetalle buscarPorId(int idPedidoDetalle) throws AttributeNotFoundException {
+		return repository.findById(idPedidoDetalle).orElseThrow(() -> new AttributeNotFoundException ("Detalle del Pedido no encontrado:" + idPedidoDetalle));
 	}
 	
-	public PedidoDetalle guardarDetalle(PedidoDetalle detalle) {
-		return repository.save(detalle);
+	public PedidoDetalle guardarDetalle(PedidoDetalle pedidoDetalle) {
+		return repository.save(pedidoDetalle);
 	}
 	
-	public PedidoDetalle actualizarDetalle(int id_pedido, PedidoDetalle datos) throws AttributeNotFoundException {
-		PedidoDetalle detalle = buscarPorId(id_pedido);
-		detalle.setId_detalle(datos.getId_detalle());
-		detalle.setObra(datos.getObra());
-		detalle.setPedido(datos.getPedido());
-		detalle.setCantidad(datos.getCantidad());
-		detalle.setPrecio(datos.getPrecio());
-		return repository.save(detalle);
+	public PedidoDetalle actualizarDetalle(int idPedidoDetalle, PedidoDetalle pedidoDatos) throws AttributeNotFoundException {
+		PedidoDetalle pedidoDetalleActualizar = buscarPorId(idPedidoDetalle);
+		pedidoDetalleActualizar.setId_detalle(pedidoDatos.getId_detalle());
+		pedidoDetalleActualizar.setObra(pedidoDatos.getObra());
+		pedidoDetalleActualizar.setPedido(pedidoDatos.getPedido());
+		pedidoDetalleActualizar.setCantidad(pedidoDatos.getCantidad());
+		pedidoDetalleActualizar.setPrecio(pedidoDatos.getPrecio());
+		return repository.save(pedidoDetalleActualizar);
 	}
 	
-	public void eliminar(int id_pedido) throws AttributeNotFoundException {
-		buscarPorId(id_pedido);
-		repository.deleteById(id_pedido);
+	public void eliminar(int idPedidoDetalle) throws AttributeNotFoundException {
+		buscarPorId(idPedidoDetalle);
+		repository.deleteById(idPedidoDetalle);
 	}
 }

@@ -31,20 +31,20 @@ public class CarritoService {
 		return repository.findAll();
 	}
 	
-	public Carrito buscarPorId(Integer id_carrito) {
-		return repository.findById(id_carrito)
+	public Carrito buscarPorId(Integer idCarrito) {
+		return repository.findById(idCarrito)
 				.orElseThrow(() -> new RuntimeException
-						("Carrito no encontrado:" + id_carrito));}
+						("Carrito no encontrado:" + idCarrito));}
 	
-	public Carrito buscarPorUsuario(Integer id_usuario) {
-		return repository.findByUsuarioIdUsuario(id_usuario).orElseThrow(() -> new RuntimeException
-				("Usuario no encontrado:" + id_usuario));}
+	public Carrito buscarPorUsuario(Integer idUsuario) {
+		return repository.findByUsuario_idUsuario(idUsuario).orElseThrow(() -> new RuntimeException
+				("Usuario no encontrado:" + idUsuario));}
 	
-	public Carrito obtenerOCrear(int id_usuario) {
-		return repository.findByUsuarioIdUsuario(id_usuario).orElseGet(() -> {
+	public Carrito obtenerOCrear(int idUsuario) {
+		return repository.findByUsuario_idUsuario(idUsuario).orElseGet(() -> {
 			Usuarios usuario = null;
 			try {
-				usuario = usuarioService.buscarPorId(id_usuario);
+				usuario = usuarioService.buscarPorId(idUsuario);
 			} catch (AttributeNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -58,8 +58,8 @@ public class CarritoService {
 		 return repository.save(carrito);
 	 }
 	
-	 public void eliminar(int id) {
-		 buscarPorId(id);
-		 repository.deleteById(id);
+	 public void eliminar(int idCarrito) {
+		 buscarPorId(idCarrito);
+		 repository.deleteById(idCarrito);
 	 }
 }

@@ -31,18 +31,18 @@ public class PagoService {
 		this.usuarioService = usuarioService;
 	}
 	
-	public Pago procesarPago(int id_usuario, Integer id_pedido, MetodoPago metodoPago,
+	public Pago procesarPago(int idUsuario, Integer idPedido, MetodoPago metodoPago,
 			String estado) throws AttributeNotFoundException {
-		Usuarios usuario = usuarioService.buscarPorId(id_usuario);
-		Pedidos pedido = pedidoService.buscarPorId(id_pedido);
-		if (pedido.getUsuario().getId_usuario() != usuario.getId_usuario()) {
+		Usuarios usuarioPago = usuarioService.buscarPorId(idUsuario);
+		Pedidos pedidoPago = pedidoService.buscarPorId(idPedido);
+		if (pedidoPago.getUsuario().getId_usuario() != usuarioPago.getId_usuario()) {
 		    throw new RuntimeException("El pedido no pertenece al usuario indicado");
 		} 
 		
 		Pago pago = new Pago();
-		pago.setUsuario(usuario);
-		pago.setPedido(pedido);
-		pago.setPrecio(pedido.getTotal());
+		pago.setUsuario(usuarioPago);
+		pago.setPedido(pedidoPago);
+		pago.setPrecio(pedidoPago.getTotal());
 		pago.setMetodoPago(metodoPago);
 		pago.setEstado(estado);
 		
@@ -50,15 +50,15 @@ public class PagoService {
 		return saved;
 	}
 	
-	public Pago buscarPorId(int id) throws AttributeNotFoundException {
-		return repository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado:" + id));
+	public Pago buscarPorId(int idPago) throws AttributeNotFoundException {
+		return repository.findById(idPago).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado:" + idPago));
 	}
 	
-	public List<Pago> listarPorUsuario(int id_usuario){
-		return repository.findByUsuarioIdUsuario(id_usuario);}
+	public List<Pago> listarPorUsuario(int idUsuario){
+		return repository.findByUsuario_idUsuario(idUsuario);}
 	
-	public Pago buscarPorPedido(int id_pedido) throws AttributeNotFoundException {
-		return repository.findByPedidoIdPedido(id_pedido).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado para pedido:" + id_pedido));
+	public Pago buscarPorPedido(int idPedido) throws AttributeNotFoundException {
+		return repository.findByPedido_idPedido(idPedido).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado para pedido:" + idPedido));
 		}
 	
 }

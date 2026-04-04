@@ -25,32 +25,32 @@ public class CategoriaController {
 	private CategoriaService service;
 	
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public List<Categorias> listar(){
 		return service.listar();
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Categorias> listarPorId(@PathVariable int id) throws AttributeNotFoundException{
-		Categorias categoria = service.buscarPorId(id);
+	@GetMapping("/listar/{idCategoria}")
+	public ResponseEntity<Categorias> listarPorId(@PathVariable int idCategoria) throws AttributeNotFoundException{
+		Categorias categoria = service.buscarPorId(idCategoria);
 		return ResponseEntity.ok(categoria);
 	}
 	
 	@PostMapping("/guardar")
-	public ResponseEntity<Categorias> guardarCategoria(@PathVariable Categorias id_categoria) throws AttributeNotFoundException{
-		Categorias categoria = service.guardar(id_categoria);
+	public ResponseEntity<Categorias> guardarCategoria(@PathVariable Categorias idCategoria) throws AttributeNotFoundException{
+		Categorias categoria = service.guardar(idCategoria);
 		return ResponseEntity.ok(categoria);
 	}
 	
-	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<Categorias> actualizarCategoria(@PathVariable int id_categoria, @RequestBody Categorias datos) throws AttributeNotFoundException{
-		Categorias categoria = service.actualizar(id_categoria, datos);
+	@PutMapping("/actualizar/{idCategoria}")
+	public ResponseEntity<Categorias> actualizarCategoria(@PathVariable int idCategoria, @RequestBody Categorias categoriaDatos) throws AttributeNotFoundException{
+		Categorias categoria = service.actualizar(idCategoria, categoriaDatos);
 		return ResponseEntity.ok(categoria);
 	}
 	
-	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<Void> eliminarCategoria(@PathVariable int id_categoria) throws AttributeNotFoundException{
-		service.eliminar(id_categoria);
-		return ResponseEntity.noContent().build();
+	@DeleteMapping("/eliminar/{idCategoria}")
+	public ResponseEntity<String> eliminarCategoria(@PathVariable int idCategoria) throws AttributeNotFoundException{
+		service.eliminar(idCategoria);
+		return ResponseEntity.ok("LA CATEGORIA DE LA OBRA" + idCategoria + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 }

@@ -2,6 +2,10 @@ package com.idat.pe.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,32 +23,35 @@ public class Favorito {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "id_favorito")
-		private int id_favorito;
+		@Column(name = "idFavorito")
+		private int idFavorito;
 		@ManyToOne
-		@JoinColumn(name = "id_usuario")
+		@JoinColumn(name = "fkUsuario")
 		private Usuarios usuario;
 		@ManyToOne
-		@JoinColumn(name = "id_obra")
+		@JoinColumn(name = "fkObra")
 		private Obras obra;
-		private java.util.Date fecha;
+		@Column(name = "fechaRegistro")
+		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		@CreationTimestamp
+		private Date fecha;
 		
 		public Favorito() {}
 
-		public Favorito(int id_favorito, Usuarios usuario, Obras obra, Date fecha) {
+		public Favorito(int idFavorito, Usuarios usuario, Obras obra, Date fecha) {
 			super();
-			this.id_favorito = id_favorito;
+			this.idFavorito = idFavorito;
 			this.usuario = usuario;
 			this.obra = obra;
 			this.fecha = fecha;
 		}
 
 		public int getId_favorito() {
-			return id_favorito;
+			return idFavorito;
 		}
 
-		public void setId_favorito(int id_favorito) {
-			this.id_favorito = id_favorito;
+		public void setId_favorito(int idFavorito) {
+			this.idFavorito = idFavorito;
 		}
 
 		public Usuarios getUsuario() {

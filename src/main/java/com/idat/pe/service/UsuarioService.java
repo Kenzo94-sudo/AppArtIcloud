@@ -23,8 +23,8 @@ public class UsuarioService {
 		return repository.findAll();
 	}
 	
-	public Usuarios buscarPorId(int id) throws AttributeNotFoundException {
-		return repository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Usuario no encontrado" + id));
+	public Usuarios buscarPorId(int idUsuario) throws AttributeNotFoundException {
+		return repository.findById(idUsuario).orElseThrow(() -> new AttributeNotFoundException("Usuario no encontrado" + idUsuario));
 	}
 	
 	public Optional<Usuarios> buscarPorEmail(String email){
@@ -35,19 +35,19 @@ public class UsuarioService {
 		return repository.save(usuario);
 	}
 	
-	public Usuarios actualizar(int id_usuario, Usuarios datos) throws AttributeNotFoundException {
-		Usuarios u = buscarPorId(id_usuario);
-		u.setNombre(datos.getNombre());
-		u.setEmail(datos.getEmail());
-		u.setDireccion(datos.getDireccion());
-		u.setTelefono(datos.getTelefono());
-		if(datos.getPassword() != null && !datos.getPassword().isBlank())
-			u.setPassword(datos.getPassword());
-		return repository.save(u);
+	public Usuarios actualizar(int idUsuario, Usuarios usuarioDatos) throws AttributeNotFoundException {
+		Usuarios usuarioActualizar = buscarPorId(idUsuario);
+		usuarioActualizar.setNombre(usuarioDatos.getNombre());
+		usuarioActualizar.setEmail(usuarioDatos.getEmail());
+		usuarioActualizar.setDireccion(usuarioDatos.getDireccion());
+		usuarioActualizar.setTelefono(usuarioDatos.getTelefono());
+		if(usuarioDatos.getPassword() != null && !usuarioDatos.getPassword().isBlank())
+			usuarioActualizar.setPassword(usuarioDatos.getPassword());
+		return repository.save(usuarioActualizar);
 	}
 	
-	public void eliminar(int id) throws AttributeNotFoundException {
-		buscarPorId(id);
-		repository.deleteById(id);
+	public void eliminar(int idUsuario) throws AttributeNotFoundException {
+		buscarPorId(idUsuario);
+		repository.deleteById(idUsuario);
 	}
 }

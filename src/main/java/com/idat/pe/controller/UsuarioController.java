@@ -27,40 +27,39 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public List<Usuarios> listar() {
 		return service.listar();
 	}
 	
-	@GetMapping("/usuarios/{id}")
-	public ResponseEntity<Usuarios> buscarPorId(@PathVariable Integer id_usuario) throws AttributeNotFoundException {
-		Usuarios usuario = service.buscarPorId(id_usuario);
+	@GetMapping("/listar/{idUsuario}")
+	public ResponseEntity<Usuarios> buscarPorId(@PathVariable Integer idUsuario) throws AttributeNotFoundException {
+		Usuarios usuario = service.buscarPorId(idUsuario);
 		return ResponseEntity.ok(usuario);
 	}
 	
-	@GetMapping("/email/{email}")
+	@GetMapping("/listar/email/{email}")
 	public ResponseEntity<Usuarios> buscarPorEmail(@PathVariable String email) {
 		Optional<Usuarios> usuario = service.buscarPorEmail(email);
 		return usuario.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@PostMapping("/guardar")
-	public ResponseEntity<Usuarios> guardar(@PathVariable Usuarios id_usuario){
-		Usuarios usuario = service.guardarUsuario(id_usuario);
+	public ResponseEntity<Usuarios> guardar(@RequestBody Usuarios usuario){
+		Usuarios usuarioGuardar = service.guardarUsuario(usuario);
 		return ResponseEntity.ok(usuario);
 	}
 	
-	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<Usuarios> actualizarUsuario(@PathVariable int id_usuario, @RequestBody Usuarios datos) throws AttributeNotFoundException {
-		Usuarios usuarioActualizado = service.actualizar(id_usuario, datos);
+	@PutMapping("/actualizar/{idUsuario}")
+	public ResponseEntity<Usuarios> actualizarUsuario(@PathVariable int idUsuario, @RequestBody Usuarios usuarioDatos) throws AttributeNotFoundException {
+		Usuarios usuarioActualizado = service.actualizar(idUsuario, usuarioDatos);
 		return ResponseEntity.ok(usuarioActualizado);
 	}
 	
-	@DeleteMapping("borrar/{id}")
-	public ResponseEntity<Void> borrarUsuario(@PathVariable int id_usuario) throws AttributeNotFoundException{
-		service.eliminar(id_usuario);
-		return ResponseEntity.noContent().build();
-			
+	@DeleteMapping("/borrar/{idUsuario}")
+	public ResponseEntity<String> borrarUsuario(@PathVariable int idUsuario) throws AttributeNotFoundException{
+		service.eliminar(idUsuario);
+		return ResponseEntity.ok("USUARIO CON ID " + idUsuario + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 	
 }

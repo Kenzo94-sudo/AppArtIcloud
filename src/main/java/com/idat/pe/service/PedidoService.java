@@ -31,37 +31,37 @@ public class PedidoService {
 	
 	public List<Pedidos> listar() { return repository.findAll();}
 	
-	public Pedidos buscarPorId(int id) throws AttributeNotFoundException {
-		return repository.findById(id).orElseThrow(() 
-				-> new AttributeNotFoundException("Pedido no encontrado:" + id));}
+	public Pedidos buscarPorId(int idPedido) throws AttributeNotFoundException {
+		return repository.findById(idPedido).orElseThrow(() 
+				-> new AttributeNotFoundException("Pedido no encontrado:" + idPedido));}
 	
 
-	public List<Pedidos> listarPorUsuario(int id_usuario){
-		return repository.findByUsuarioIdUsuario(id_usuario);}
+	public List<Pedidos> listarPorUsuario(int idUsuario){
+		return repository.findByUsuario_idUsuario(idUsuario);}
 	
-	public Pedidos crear(int id_usuario, int id_obra) throws AttributeNotFoundException {
-		Usuarios usuario = usuarioService.buscarPorId(id_usuario);
-		Obras obra = obraService.buscarPorId(id_obra);
+	public Pedidos crear(int idUsuario, int idObra) throws AttributeNotFoundException {
+		Usuarios usuario = usuarioService.buscarPorId(idUsuario);
+		Obras obra = obraService.buscarPorId(idObra);
 		Pedidos pedido = new Pedidos();
 		pedido.setUsuario(usuario);
 		pedido.setObra(obra);
 		pedido.setTotal(obra.getPrecio());
 		return repository.save(pedido);}
 	
-	public Pedidos actualizar(int id_pedido, Pedidos datos) throws AttributeNotFoundException {
-		Pedidos pedido = buscarPorId(id_pedido);
-		pedido.setId_pedidos(datos.getId_pedidos());
-		pedido.setObra(datos.getObra());
-		pedido.setUsuario(datos.getUsuario());
-		pedido.setTotal(datos.getTotal());
-		pedido.setFechaPedido(datos.getFechaPedido());
-		pedido.setEstado(datos.getEstado());
-		return repository.save(pedido);
+	public Pedidos actualizar(int idPedido, Pedidos pedidoDatos) throws AttributeNotFoundException {
+		Pedidos pedidoActualizar = buscarPorId(idPedido);
+		pedidoActualizar.setId_pedidos(pedidoDatos.getId_pedidos());
+		pedidoActualizar.setObra(pedidoDatos.getObra());
+		pedidoActualizar.setUsuario(pedidoDatos.getUsuario());
+		pedidoActualizar.setTotal(pedidoDatos.getTotal());
+		pedidoActualizar.setFechaPedido(pedidoDatos.getFechaPedido());
+		pedidoActualizar.setEstado(pedidoDatos.getEstado());
+		return repository.save(pedidoActualizar);
 	}
 	
-	public void eliminar(int id) throws AttributeNotFoundException {
-		buscarPorId(id);
-		repository.deleteById(id);
+	public void eliminar(int idPedido) throws AttributeNotFoundException {
+		buscarPorId(idPedido);
+		repository.deleteById(idPedido);
 	}
 
 }

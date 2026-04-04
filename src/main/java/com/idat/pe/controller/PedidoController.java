@@ -27,38 +27,38 @@ public class PedidoController {
 	@Autowired
 	private PedidoService service;
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public List<Pedidos> listar() {
 		return service.listar();
 	}
 	
-	@GetMapping("/{id_pedido}")
-	public ResponseEntity<Pedidos> listarPorId(@PathVariable int id_pedido) throws AttributeNotFoundException{
-		Pedidos pedido = service.buscarPorId(id_pedido);
+	@GetMapping("/listar/{idPedido}")
+	public ResponseEntity<Pedidos> listarPorId(@PathVariable int idPedido) throws AttributeNotFoundException{
+		Pedidos pedido = service.buscarPorId(idPedido);
 		return ResponseEntity.ok(pedido);
 	}
 	
-	@GetMapping("/usuario/{id_usuario}")
-	public ResponseEntity<Pedidos> listarPorUsuario(@RequestParam int id_usuario) throws AttributeNotFoundException{
-		Pedidos usuario = service.buscarPorId(id_usuario);
+	@GetMapping("buscar/usuario/{idUsuario}")
+	public ResponseEntity<Pedidos> listarPorUsuario(@RequestParam int idUsuario) throws AttributeNotFoundException{
+		Pedidos usuario = service.buscarPorId(idUsuario);
 		return ResponseEntity.ok(usuario);
 	}
 	
 	@PostMapping("/guardar")
 	public ResponseEntity<Pedidos> guardarPedido(@RequestBody Map<String, Integer> body) throws AttributeNotFoundException{
-		return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(body.get("id_usuario"), body.get("id_obra")));
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.crear(body.get("idUsuario"), body.get("idObra")));
 	}
 	
-	@PutMapping("/actualizar")
-	public ResponseEntity<Pedidos> actualizarPedido(@PathVariable int id_pedido,@RequestParam Pedidos datos) throws AttributeNotFoundException{
-		Pedidos pedidoActualizar = service.actualizar(id_pedido, datos);
+	@PutMapping("/actualizar/{idPedido}")
+	public ResponseEntity<Pedidos> actualizarPedido(@PathVariable int idPedido, @RequestParam Pedidos pedidoDatos) throws AttributeNotFoundException{
+		Pedidos pedidoActualizar = service.actualizar(idPedido, pedidoDatos);
 		return ResponseEntity.ok(pedidoActualizar);
 	}
 	
-	@DeleteMapping("/eliminar({id_pedido}")
-	public ResponseEntity<Void> eliminarPedido(@PathVariable int id_pedido) throws AttributeNotFoundException {
-		service.eliminar(id_pedido);
-		return ResponseEntity.noContent().build();
+	@DeleteMapping("/eliminar({idPedido}")
+	public ResponseEntity<String> eliminarPedido(@PathVariable int idPedido) throws AttributeNotFoundException {
+		service.eliminar(idPedido);
+		return ResponseEntity.ok("PEDIDO CON ID " + idPedido + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 }
 	

@@ -12,27 +12,26 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "carrito_detalle")
+@Table(name = "carritoDetalle")
 public class CarritoDetalle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_detalle")
-	private int id_detalle;
-
+	@Column(name = "idCarritoDetalle")
+	private int idCarritoDetalle;
 	@ManyToOne
-	@JoinColumn(name = "id_carrito")
+	@JoinColumn(name = "fkCarrito")
 	private Carrito carrito;
 	@ManyToOne
-	@JoinColumn(name = "id_obra")
+	@JoinColumn(name = "fkObra")
 	private Obras obras;
 	private int cantidad;
 	private float precio;
 	
 	public CarritoDetalle() {}
 
-	public CarritoDetalle(int id_detalle, Carrito carrito, Obras obras, int cantidad, float precio) {
+	public CarritoDetalle(int idCarritoDetalle, Carrito carrito, Obras obras, int cantidad, float precio) {
 		super();
-		this.id_detalle = id_detalle;
+		this.idCarritoDetalle = idCarritoDetalle;
 		this.carrito = carrito;
 		this.obras = obras;
 		this.cantidad = cantidad;
@@ -40,11 +39,11 @@ public class CarritoDetalle {
 	}
 
 	public int getId_detalle() {
-		return id_detalle;
+		return idCarritoDetalle;
 	}
 
-	public void setId_detalle(int id_detalle) {
-		this.id_detalle = id_detalle;
+	public void setId_detalle(int idCarritoDetalle) {
+		this.idCarritoDetalle = idCarritoDetalle;
 	}
 
 	public Carrito getCarrito() {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.idat.pe.model.Carrito;
 @Repository
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
-	Optional<Carrito> findByUsuarioIdUsuario(Integer id_usuario);
-	Optional<Carrito> findById(Integer id_carrito);
-	
+	Optional<Carrito> findByUsuario_idUsuario(Integer idUsuario);
+	Optional<Carrito> findById(Integer idCarrito);
 }

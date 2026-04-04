@@ -12,27 +12,27 @@ import jakarta.persistence.Table;
 public class Categorias {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_categoria")
-	private Integer id_categoria;
+	@Column(name = "idCategoria")
+	private Integer idCategoria;
 	private String nombre;
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
 		
 		public Categorias() {}
 
-		public Categorias(Integer id_categoria, String nombre, String descripcion) {
+		public Categorias(Integer idCategoria, String nombre, String descripcion) {
 			super();
-			this.id_categoria = id_categoria;
+			this.idCategoria = idCategoria;
 			this.nombre = nombre;
 			this.descripcion = descripcion;
 		}
 
 		public Integer getId_categoria() {
-			return id_categoria;
+			return idCategoria;
 		}
 
-		public void setId_categoria(Integer id_categoria) {
-			this.id_categoria = id_categoria;
+		public void setId_categoria(Integer idCategoria) {
+			this.idCategoria = idCategoria;
 		}
 
 		public String getNombre() {

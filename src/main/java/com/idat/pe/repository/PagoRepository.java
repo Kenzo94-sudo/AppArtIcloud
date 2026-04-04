@@ -9,7 +9,7 @@ import com.idat.pe.model.MetodoPago;
 import com.idat.pe.model.Pago;
 
 public interface PagoRepository extends JpaRepository<Pago, Integer> {
-	List<Pago> findByUsuarioIdUsuario(Integer id_usuario);
-	Optional<Pago> findByPedidoIdPedido(Integer id_pedido);
+	List<Pago> findByUsuario_idUsuario(Integer idUsuario);
+	Optional<Pago> findByPedido_idPedido(Integer idPedido);
 	List<Pago> findByMetodoPago(MetodoPago metodopago);
 }

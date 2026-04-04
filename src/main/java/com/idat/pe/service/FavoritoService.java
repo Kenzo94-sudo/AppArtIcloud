@@ -29,14 +29,14 @@ public class FavoritoService {
 			return repository.findAll();
 		}
 		
-		public Favorito guardarFavorito(Favorito favorito )
+		public Favorito guardarFavorito(Favorito favorito)
 		{
 			return repository.save(favorito);
 		}
 		
-		public void eliminarFavorito(int id_favorito)
+		public void eliminarFavorito(int idFavorito)
 		{
-			repository.deleteById(id_favorito);
+			repository.deleteById(idFavorito);
 		}
 	
 }

@@ -2,6 +2,10 @@ package com.idat.pe.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,27 +22,30 @@ import jakarta.persistence.Table;
 public class Pago {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pago")
-	private int id_pago;
+	@Column(name = "idPago")
+	private int idPago;
 	@ManyToOne
-	@JoinColumn(name = "id_pedido")
+	@JoinColumn(name = "fkPedido")
 	private Pedidos pedido;
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "fkUsuario")
 	private Usuarios usuario;
 	private float precio;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "metodo_pago")
 	private MetodoPago metodoPago;
 	private String estado;
-	private java.util.Date fechaPago;
+	@Column(name = "fechaRegistro")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private Date fechaPago;
 	
 	public Pago() {}
 
-	public Pago(int id_pago, Pedidos pedido, Usuarios usuario, float precio, MetodoPago metodoPago, String estado,
+	public Pago(int idPago, Pedidos pedido, Usuarios usuario, float precio, MetodoPago metodoPago, String estado,
 			Date fechaPago) {
 		super();
-		this.id_pago = id_pago;
+		this.idPago = idPago;
 		this.pedido = pedido;
 		this.usuario = usuario;
 		this.precio = precio;
@@ -48,11 +55,11 @@ public class Pago {
 	}
 
 	public int getId_pago() {
-		return id_pago;
+		return idPago;
 	}
 
-	public void setId_pago(int id_pago) {
-		this.id_pago = id_pago;
+	public void setId_pago(int idPago) {
+		this.idPago = idPago;
 	}
 
 	public Pedidos getPedido() {

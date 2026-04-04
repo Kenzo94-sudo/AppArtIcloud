@@ -10,56 +10,57 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idat.pe.model.CarritoDetalle;
 import com.idat.pe.service.CarritoDetalleService;
 
 @RestController
-@RequestMapping("/api/Detalle")
+@RequestMapping("/api/carritoDetalle")
 public class CarritoDetalleController {
 
 	@Autowired
 	private CarritoDetalleService service;
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public List<CarritoDetalle> listar(){
 		return service.listar();
 	}
 	
-	@GetMapping("/{id_detalle}")
-	public ResponseEntity<CarritoDetalle> listarPorId(@PathVariable int id_detalle)
+	@GetMapping("/listar/{idCarritoDetalle}")
+	public ResponseEntity<CarritoDetalle> listarPorId(@PathVariable int idCarritoDetalle)
 	{
-		CarritoDetalle detalle = service.buscarPorId(id_detalle);
+		CarritoDetalle detalle = service.buscarPorId(idCarritoDetalle);
 		return ResponseEntity.ok(detalle);
 	}
 	
-	@GetMapping("/{id_carrito}")
-	public ResponseEntity<CarritoDetalle> listarPorCarrito(@PathVariable int id_carrito)
+	@GetMapping("/listar/carrito/{idCarrito}")
+	public ResponseEntity<CarritoDetalle> listarPorCarrito(@RequestParam int idCarrito)
 	{
-		CarritoDetalle detalle = service.listarPorCarrito(id_carrito);
-		return ResponseEntity.ok(detalle);
+		CarritoDetalle carritoDetalleListar = service.listarPorCarrito(idCarrito);
+		return ResponseEntity.ok(carritoDetalleListar);
 	}
 	
 	@PostMapping("/guardar")
 	public ResponseEntity<CarritoDetalle> guardar(@PathVariable CarritoDetalle carritoDetalle)
 	{
-		CarritoDetalle detalle1 = service.guardarDetalle(carritoDetalle);
-		return ResponseEntity.ok(detalle1);
+		CarritoDetalle carritoDetalleGuardar = service.guardarDetalle(carritoDetalle);
+		return ResponseEntity.ok(carritoDetalleGuardar);
 	}
 	
-	@PutMapping("/actualizar/{id_detalle}")
-	public ResponseEntity<CarritoDetalle> actualizarDetalle(@PathVariable int id_detalle, CarritoDetalle datos)
+	@PutMapping("/actualizar/{idCarritoDetalle}")
+	public ResponseEntity<CarritoDetalle> actualizarDetalle(@PathVariable int idCarritoDetalle, CarritoDetalle carritoDetalleDatos)
 	{
-		CarritoDetalle cDetalle = service.actualizar(id_detalle, datos);
-		return ResponseEntity.ok(cDetalle);
+		CarritoDetalle carritoDetalleActualizar = service.actualizar(idCarritoDetalle, carritoDetalleDatos);
+		return ResponseEntity.ok(carritoDetalleActualizar);
 	}
 	
-	@DeleteMapping("/eliminar/{id_detalle}")
-	public ResponseEntity<Void> eliminarDetalle(@PathVariable int id_detalle)
+	@DeleteMapping("/eliminar/{idCarritoDetalle}")
+	public ResponseEntity<String> eliminarDetalle(@PathVariable int idCarritoDetalle)
 	{
-		service.eliminar(id_detalle);
-		return ResponseEntity.noContent().build();
+		service.eliminar(idCarritoDetalle);
+		return ResponseEntity.ok("EL DETALLE DE LA COMPRA CON EL ID" + idCarritoDetalle + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 	
 }

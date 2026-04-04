@@ -15,21 +15,21 @@ public class PedidoDetalle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int id_detalle;
+	private int idPedidoDetalle;
 	@OneToOne
-	@JoinColumn(name = "id_pedido")
+	@JoinColumn(name = "fkPedido")
 	private Pedidos pedido;
 	@OneToOne
-	@JoinColumn(name = "id_obra")
+	@JoinColumn(name = "fkObra")
 	private Obras obra;
 	private int cantidad;
 	private float precio;
 	
 	public PedidoDetalle() {}
 
-	public PedidoDetalle(int id_detalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
+	public PedidoDetalle(int idPedidoDetalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
 		super();
-		this.id_detalle = id_detalle;
+		this.idPedidoDetalle = idPedidoDetalle;
 		this.pedido = pedido;
 		this.obra = obra;
 		this.cantidad = cantidad;
@@ -37,11 +37,11 @@ public class PedidoDetalle {
 	}
 
 	public int getId_detalle() {
-		return id_detalle;
+		return idPedidoDetalle;
 	}
 
-	public void setId_detalle(int id_detalle) {
-		this.id_detalle = id_detalle;
+	public void setId_detalle(int idPedidoDetalle) {
+		this.idPedidoDetalle = idPedidoDetalle;
 	}
 
 	public Pedidos getPedido() {
