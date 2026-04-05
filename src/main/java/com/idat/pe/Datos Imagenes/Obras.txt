@@ -1,0 +1,32 @@
+Obra 1
+Campo	Valor
+titulo	Noche Estrellada
+descripcion	Pintura expresionista con un cielo nocturno lleno de movimiento y energía.
+precio	3500
+stock	1
+image_url	https://upload.wikimedia.org/wikipedia/commons/e/ea/The_Starry_Night.jpg
+******************************************************
+Obra 2
+Campo	Valor
+titulo	La Mona Lisa
+descripcion	Retrato renacentista famoso por su enigmática sonrisa.
+precio	5000
+stock	1
+image_url	https://upload.wikimedia.org/wikipedia/commons/6/6a/Mona_Lisa.jpg
+******************************************************
+Obra 3
+Campo	Valor
+titulo	El Grito
+descripcion	Obra expresionista que representa angustia y desesperación humana.
+precio	4200
+stock	1
+image_url	https://upload.wikimedia.org/wikipedia/commons/f/f4/The_Scream.jpg
+******************************************************
+Obra 4
+Campo	Valor
+titulo	La persistencia de la memoria
+descripcion	Pintura surrealista con relojes derritiéndose en un paisaje desértico.
+precio	3900
+stock	1
+image_url	https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg
+******************************************************
