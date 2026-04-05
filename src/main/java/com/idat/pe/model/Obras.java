@@ -27,10 +27,17 @@ public class Obras {
 	private float precio;
 	private int stock;
 	private String image_url;
+<<<<<<< HEAD
 	@Column(name = "fechaRegistro")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
 	private Date fechaRegistro;
+=======
+	@Column(name = "fechaCreacion")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private Date fechaCreacion;
+>>>>>>> 2eb7f542d8351c0f8ee8de524143761d0f042e1d
 	@ManyToOne
 	@JoinColumn(name = "fkCategoria")
 	private Categorias categoria;
