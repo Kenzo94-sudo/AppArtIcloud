@@ -8,6 +8,7 @@ import javax.management.AttributeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.idat.pe.config.JwtUtil;
 import com.idat.pe.model.Usuarios;
 import com.idat.pe.repository.UsuarioRepository;
 
@@ -15,6 +16,8 @@ import com.idat.pe.repository.UsuarioRepository;
 public class AuthService {
 	@Autowired
     private final UsuarioRepository repository;
+	@Autowired
+	private JwtUtil jwtUtil;
 
     public AuthService(UsuarioRepository repository) {
         this.repository = repository;
@@ -26,6 +29,8 @@ public class AuthService {
 
         if (!usuario.getPassword().equals(password))
             throw new RuntimeException("Contraseña incorrecta");
+        
+        String token = JwtUtil.generarToken(usuario.getEmail());
 
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("idUsuario", usuario.getId_usuario());

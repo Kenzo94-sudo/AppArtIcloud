@@ -24,7 +24,7 @@ public class Carrito {
 	@Column(name = "idCarrito" )
 	private int idCarrito;
 	@ManyToOne
-	@JoinColumn(name = "fkUsuario")
+	@JoinColumn(name = "idUsuario")
 	private Usuarios usuario;
 	@Column(name = "fechaRegistro")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

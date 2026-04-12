@@ -32,7 +32,7 @@ public class Obras {
 	@CreationTimestamp
 	private Date fechaRegistro;
 	@ManyToOne
-	@JoinColumn(name = "fkCategoria")
+	@JoinColumn(name = "idCategoria")
 	private Categorias categoria;
 	
 	public Obras() {

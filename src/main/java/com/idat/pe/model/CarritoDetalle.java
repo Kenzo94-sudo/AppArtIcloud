@@ -19,10 +19,10 @@ public class CarritoDetalle {
 	@Column(name = "idCarritoDetalle")
 	private int idCarritoDetalle;
 	@ManyToOne
-	@JoinColumn(name = "fkCarrito")
+	@JoinColumn(name = "idCarrito")
 	private Carrito carrito;
 	@ManyToOne
-	@JoinColumn(name = "fkObra")
+	@JoinColumn(name = "idObra")
 	private Obras obras;
 	private int cantidad;
 	private float precio;

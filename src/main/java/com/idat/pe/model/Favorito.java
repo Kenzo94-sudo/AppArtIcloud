@@ -26,10 +26,10 @@ public class Favorito {
 		@Column(name = "idFavorito")
 		private int idFavorito;
 		@ManyToOne
-		@JoinColumn(name = "fkUsuario")
+		@JoinColumn(name = "idUsuario")
 		private Usuarios usuario;
 		@ManyToOne
-		@JoinColumn(name = "fkObra")
+		@JoinColumn(name = "idObra")
 		private Obras obra;
 		@Column(name = "fechaRegistro")
 		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

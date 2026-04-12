@@ -20,13 +20,13 @@ import jakarta.persistence.Table;
 public class Pedidos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "fkPedido")
+	@Column(name = "idPedido")
 	private int idPedido;
 	@ManyToOne
-	@JoinColumn(name = "fkUsuario")
+	@JoinColumn(name = "idUsuario")
 	private Usuarios usuario;
 	@ManyToOne
-	@JoinColumn(name = "fkObra")
+	@JoinColumn(name = "idObra")
 	private Obras obra;
 	@Column(name = "fechaRegistro")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

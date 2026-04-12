@@ -25,10 +25,10 @@ public class Pago {
 	@Column(name = "idPago")
 	private int idPago;
 	@ManyToOne
-	@JoinColumn(name = "fkPedido")
+	@JoinColumn(name = "idPedido")
 	private Pedidos pedido;
 	@ManyToOne
-	@JoinColumn(name = "fkUsuario")
+	@JoinColumn(name = "idUsuario")
 	private Usuarios usuario;
 	private float precio;
 	@Enumerated(EnumType.STRING)

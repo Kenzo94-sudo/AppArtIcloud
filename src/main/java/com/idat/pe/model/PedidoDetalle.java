@@ -17,10 +17,10 @@ public class PedidoDetalle {
 	@Column
 	private int idPedidoDetalle;
 	@OneToOne
-	@JoinColumn(name = "fkPedido")
+	@JoinColumn(name = "idPedido")
 	private Pedidos pedido;
 	@OneToOne
-	@JoinColumn(name = "fkObra")
+	@JoinColumn(name = "idObra")
 	private Obras obra;
 	private int cantidad;
 	private float precio;
