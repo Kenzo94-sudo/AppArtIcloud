@@ -50,4 +50,13 @@ public class UsuarioService {
 		buscarPorId(idUsuario);
 		repository.deleteById(idUsuario);
 	}
+	
+	//Para el AuthController
+	public Usuarios autenticar(String email, String password) {
+	    Usuarios usuario = repository.findByEmail(email)
+	        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+	    if (!usuario.getPassword().equals(password))
+	        throw new RuntimeException("Contraseña incorrecta");
+	    return usuario;
+	}
 }

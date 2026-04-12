@@ -24,15 +24,20 @@ public class AuthService {
     }
 
     public Map<String, Object> login(String email, String password) throws AttributeNotFoundException {
-        Usuarios usuario = repository.findByEmail(email)
+    	// PASO 1 — Busca el usuario en la BD por email
+    	Usuarios usuario = repository.findByEmail(email)
                 .orElseThrow(() -> new AttributeNotFoundException("Usuario no encontrado"));
-
+       
+    	// PASO 2 — Verifica que la contraseña sea correcta
         if (!usuario.getPassword().equals(password))
             throw new RuntimeException("Contraseña incorrecta");
         
+        // PASO 3 — Genera el token JWT
         String token = JwtUtil.generarToken(usuario.getEmail());
 
+        // PASO 4 — Devuelve token + datos del usuario
         Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("token", token);
         respuesta.put("idUsuario", usuario.getId_usuario());
         respuesta.put("nombre", usuario.getNombre());
         respuesta.put("email", usuario.getEmail());
