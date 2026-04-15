@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,3 +55,49 @@ public class CategoriaController {
 		return ResponseEntity.ok("LA CATEGORIA DE LA OBRA" + idCategoria + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 }
+=======
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.idat.pe.model.Categorias;
+import com.idat.pe.service.CategoriaService;
+
+@RestController
+@RequestMapping("/api/categoria")
+@CrossOrigin(origins = "*")
+public class CategoriaController {
+
+    private final CategoriaService service;
+
+    public CategoriaController(CategoriaService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Categorias> listar() {
+        return service.listar();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Categorias> buscarPorId(@PathVariable int id) throws AttributeNotFoundException {
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @PostMapping("/guardar")
+    public ResponseEntity<Categorias> guardar(@RequestBody Categorias categoria) {
+        return ResponseEntity.ok(service.guardar(categoria));
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Categorias> actualizar(@PathVariable int id, @RequestBody Categorias datos)
+            throws AttributeNotFoundException {
+        return ResponseEntity.ok(service.actualizar(id, datos));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable int id) throws AttributeNotFoundException {
+        service.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+>>>>>>> 1709edb (FINAL COMMIT)

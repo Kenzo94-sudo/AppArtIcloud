@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -71,3 +72,54 @@ public class ObraController {
 		return ResponseEntity.ok("OBRA CON ID" + idObra + "HA SIDO ELIMINADO EXITOSAMENTE");
 	}
 }
+=======
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.idat.pe.model.Obras;
+import com.idat.pe.service.ObraService;
+
+@RestController
+@RequestMapping("/api/obra")
+@CrossOrigin(origins = "*")
+public class ObraController {
+
+    private final ObraService service;
+
+    public ObraController(ObraService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Obras> listar() {
+        return service.listar();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Obras> buscarPorId(@PathVariable int id) throws AttributeNotFoundException {
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @GetMapping("/titulo")
+    public ResponseEntity<List<Obras>> buscarPorTitulo(@RequestParam String titulo) {
+        return ResponseEntity.ok(service.buscarPorTitulo(titulo));
+    }
+
+    @GetMapping("/precio")
+    public ResponseEntity<List<Obras>> buscarPorPrecio(
+            @RequestParam float min,
+            @RequestParam float max) {
+        return ResponseEntity.ok(service.filtrarPorPrecio(min, max));
+    }
+
+    @GetMapping("/categoria/{id}")
+    public ResponseEntity<List<Obras>> listarPorCategoria(@PathVariable int id) {
+        return ResponseEntity.ok(service.listarPorCategoria(id));
+    }
+
+    @PostMapping("/guardar")
+    public ResponseEntity<Obras> guardar(@RequestBody Obras obra) throws AttributeNotFoundException {
+        return ResponseEntity.ok(service.guardar(obra));
+    }
+}
+>>>>>>> 1709edb (FINAL COMMIT)

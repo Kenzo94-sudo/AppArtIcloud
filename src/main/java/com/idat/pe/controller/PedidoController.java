@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.management.AttributeNotFoundException;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,3 +75,44 @@ public class PedidoController {
 	}
 }
 	
+=======
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.idat.pe.model.Pedidos;
+import com.idat.pe.service.PedidoService;
+
+@RestController
+@RequestMapping("/api/pedido")
+@CrossOrigin(origins = "*")
+public class PedidoController {
+
+    private final PedidoService service;
+
+    public PedidoController(PedidoService service) {
+        this.service = service;
+    }
+
+    // GET /api/pedido/usuario/{id}
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<Pedidos>> listarPorUsuario(@PathVariable int id) {
+        return ResponseEntity.ok(service.listarPorUsuario(id));
+    }
+
+    // POST /api/pedido/crear
+    // Body: { "idUsuario": 1, "idObra": 3 }
+    @PostMapping("/crear")
+    public ResponseEntity<Pedidos> crear(@RequestBody Map<String, Integer> body)
+            throws AttributeNotFoundException {
+        int idUsuario = body.get("idUsuario");
+        int idObra    = body.get("idObra");
+        return ResponseEntity.ok(service.crear(idUsuario, idObra));
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable int id) throws AttributeNotFoundException {
+        service.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+>>>>>>> 1709edb (FINAL COMMIT)

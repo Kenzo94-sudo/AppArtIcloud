@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 		package com.idat.pe.service;
 
 		import com.idat.pe.DTO.FavoritoRequest;
@@ -70,3 +71,10 @@ import javax.management.AttributeNotFoundException;
 		    }
 		}
 	
+=======
+package com.idat.pe.service;
+
+public class FavoritoService {
+
+}
+>>>>>>> 1709edb (FINAL COMMIT)

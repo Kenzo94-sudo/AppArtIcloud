@@ -1,5 +1,6 @@
 package com.idat.pe.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +59,8 @@ public class CarritoDetalleService {
 		}
 		
 		
+=======
+public class CarritoDetalleService {
+
+>>>>>>> 1709edb (FINAL COMMIT)
 }

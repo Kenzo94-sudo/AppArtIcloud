@@ -38,6 +38,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
 		<dependency>
 			    <groupId>io.jsonwebtoken</groupId>
 			    <artifactId>jjwt-api</artifactId>
@@ -55,6 +56,8 @@
 			    <version>0.12.6</version>
 			    <scope>runtime</scope>
 			</dependency>   
+=======
+>>>>>>> 1709edb (FINAL COMMIT)
     </dependencies>
 
     <build>

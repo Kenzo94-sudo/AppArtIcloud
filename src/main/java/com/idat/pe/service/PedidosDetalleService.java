@@ -1,5 +1,6 @@
 package com.idat.pe.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import javax.management.AttributeNotFoundException;
@@ -46,4 +47,8 @@ public class PedidosDetalleService {
 		buscarPorId(idPedidoDetalle);
 		repository.deleteById(idPedidoDetalle);
 	}
+=======
+public class PedidosDetalleService {
+
+>>>>>>> 1709edb (FINAL COMMIT)
 }

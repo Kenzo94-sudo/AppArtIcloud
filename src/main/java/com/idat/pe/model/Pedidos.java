@@ -1,5 +1,6 @@
 package com.idat.pe.model;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,6 +9,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
+=======
+import java.util.Date;
+
+>>>>>>> 1709edb (FINAL COMMIT)
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,13 +20,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+<<<<<<< HEAD
 import jakarta.persistence.OneToMany;
+=======
+>>>>>>> 1709edb (FINAL COMMIT)
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pedidos")
 public class Pedidos {
 	@Id
+<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido")
     private int idPedido;
@@ -45,6 +54,28 @@ public class Pedidos {
 	public Pedidos(int idPedido, Usuarios usuario, Obras obra, LocalDateTime fechaPedido, float total, String estado) {
 		super();
 		this.idPedido = idPedido;
+=======
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pedido")
+	private int id_pedidos;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuarios usuario;
+	@ManyToOne
+	@JoinColumn(name = "id_obra")
+	private Obras obra;
+	private java.util.Date fechaPedido;
+	private float total;
+	private String estado;
+	
+	public Pedidos() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Pedidos(int id_pedidos, Usuarios usuario, Obras obra, Date fechaPedido, float total, String estado) {
+		super();
+		this.id_pedidos = id_pedidos;
+>>>>>>> 1709edb (FINAL COMMIT)
 		this.usuario = usuario;
 		this.obra = obra;
 		this.fechaPedido = fechaPedido;
@@ -53,11 +84,19 @@ public class Pedidos {
 	}
 
 	public int getId_pedidos() {
+<<<<<<< HEAD
 		return idPedido;
 	}
 
 	public void setId_pedidos(int idPedido) {
 		this.idPedido = idPedido;
+=======
+		return id_pedidos;
+	}
+
+	public void setId_pedidos(int id_pedidos) {
+		this.id_pedidos = id_pedidos;
+>>>>>>> 1709edb (FINAL COMMIT)
 	}
 
 	public Usuarios getUsuario() {
@@ -76,6 +115,7 @@ public class Pedidos {
 		this.obra = obra;
 	}
 
+<<<<<<< HEAD
 	public LocalDateTime getFechaPedido() {
 		return fechaPedido;
 	}
@@ -89,6 +129,21 @@ public class Pedidos {
 	}
 
 	public void setTotal(double total) {
+=======
+	public java.util.Date getFechaPedido() {
+		return fechaPedido;
+	}
+
+	public void setFechaPedido(java.util.Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+>>>>>>> 1709edb (FINAL COMMIT)
 		this.total = total;
 	}
 

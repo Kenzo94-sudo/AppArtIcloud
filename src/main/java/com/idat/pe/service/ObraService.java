@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+>>>>>>> 1709edb (FINAL COMMIT)
 import org.springframework.stereotype.Service;
 
 import com.idat.pe.model.Categorias;
@@ -13,9 +16,13 @@ import com.idat.pe.repository.ObraRepository;
 
 @Service
 public class ObraService {
+<<<<<<< HEAD
 	@Autowired
 	private final ObraRepository repository;
 	@Autowired
+=======
+	private final ObraRepository repository;
+>>>>>>> 1709edb (FINAL COMMIT)
 	private final CategoriaService categoriaService;
 	
 	public ObraService(ObraRepository repository, CategoriaService categoriaService) {
@@ -25,19 +32,33 @@ public class ObraService {
 	
 	public List<Obras> listar() { return repository.findAll();}
 	
+<<<<<<< HEAD
 	public Obras buscarPorId(int idObra) throws AttributeNotFoundException {
 		return repository.findById(idObra).orElseThrow(() -> new AttributeNotFoundException("Obra no encontrada:" + idObra));}
 	
 	public List<Obras> listarPorCategoria(int idCategoria){
 		return repository.findByCategoria_idCategoria(idCategoria);
+=======
+	public Obras buscarPorId(int id) throws AttributeNotFoundException {
+		return repository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Obra no encontrada:" + id));}
+	
+
+	public List<Obras> listarPorCategoria(int id_categoria){
+		return repository.findByCategoriaIdCategoria(id_categoria);
+>>>>>>> 1709edb (FINAL COMMIT)
 		}
 	
 	public List<Obras> buscarPorTitulo(String titulo) {
 		return repository.findByTituloContainingIgnoreCase(titulo);
 	}
 	
+<<<<<<< HEAD
 	public List<Obras> filtrarPorPrecio(float precio){
 		return repository.findByPrecio(precio);}
+=======
+	public List<Obras> filtrarPorPrecio(float min, float max){
+		return repository.findByPrecioBetween(min, max);}
+>>>>>>> 1709edb (FINAL COMMIT)
 		
 	public Obras guardar(Obras o) throws AttributeNotFoundException {
 
@@ -54,6 +75,7 @@ public class ObraService {
 
 	    return repository.save(o);
 	}
+<<<<<<< HEAD
 	
 	public Obras actualizar(int idObra, Obras obraDatos) throws AttributeNotFoundException {
 		Obras obraActualizar = buscarPorId(idObra);
@@ -72,3 +94,9 @@ public class ObraService {
 		repository.deleteById(idObra);	}
 	
 	}
+=======
+	}
+	
+	
+	
+>>>>>>> 1709edb (FINAL COMMIT)

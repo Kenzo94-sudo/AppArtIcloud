@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +31,37 @@ public class PedidoService {
 	
 	public PedidoService(PedidosRepository repository, 
 			UsuarioService usuarioService, ObraService obraService, PedidosDetalleRepository detalleRepository)
+=======
+import org.springframework.stereotype.Service;
+
+import com.idat.pe.model.Obras;
+import com.idat.pe.model.Pedidos;
+import com.idat.pe.model.Usuarios;
+import com.idat.pe.repository.PedidosRepository;
+
+@Service
+public class PedidoService {
+	
+	private final PedidosRepository repository;
+	private final UsuarioService usuarioService;
+	private final ObraService obraService;
+	
+	public PedidoService(PedidosRepository repository, 
+			UsuarioService usuarioService, ObraService obraService)
+>>>>>>> 1709edb (FINAL COMMIT)
 	{
 		this.repository = repository;
 		this.usuarioService = usuarioService;
 		this.obraService = obraService;
+<<<<<<< HEAD
 		this.detalleRepository = detalleRepository;
+=======
+>>>>>>> 1709edb (FINAL COMMIT)
 	}
 	
 	public List<Pedidos> listar() { return repository.findAll();}
 	
+<<<<<<< HEAD
 	public Pedidos buscarPorId(int idPedido) throws AttributeNotFoundException {
 		return repository.findById(idPedido).orElseThrow(() 
 				-> new AttributeNotFoundException("Pedido no encontrado:" + idPedido));}
@@ -99,4 +122,27 @@ public class PedidoService {
 		repository.deleteById(idPedido);
 	}
 
+=======
+	public Pedidos buscarPorId(int id) throws AttributeNotFoundException {
+		return repository.findById(id).orElseThrow(() 
+				-> new AttributeNotFoundException("Pedido no encontrado:" + id));}
+	
+
+	public List<Pedidos> listarPorUsuario(int id_usuario){
+		return repository.findByUsuarioIdUsuario(id_usuario);}
+	
+	public Pedidos crear(int id_usuario, int id_obra) throws AttributeNotFoundException {
+		Usuarios usuario = usuarioService.buscarPorId(id_usuario);
+		Obras obra = obraService.buscarPorId(id_obra);
+		Pedidos pedido = new Pedidos();
+		pedido.setUsuario(usuario);
+		pedido.setObra(obra);
+		pedido.setTotal(obra.getPrecio());
+		return repository.save(pedido);}
+	
+	public void eliminar(int id) throws AttributeNotFoundException {
+		buscarPorId(id);
+		repository.deleteById(id);
+	}
+>>>>>>> 1709edb (FINAL COMMIT)
 }

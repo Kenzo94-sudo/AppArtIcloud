@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+<<<<<<< HEAD
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -82,3 +83,52 @@ public class PedidoDetalle {
 	
 	
 }
+=======
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pedidoDetalle")
+public class PedidoDetalle {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private int id_detalle;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedidos pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "id_obra")
+    private Obras obra;
+
+    private int cantidad;
+    private float precio;
+
+    public PedidoDetalle() {}
+
+    public PedidoDetalle(int id_detalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
+        this.id_detalle = id_detalle;
+        this.pedido = pedido;
+        this.obra = obra;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    public int getId_detalle() { return id_detalle; }
+    public void setId_detalle(int id_detalle) { this.id_detalle = id_detalle; }
+
+    public Pedidos getPedido() { return pedido; }
+    public void setPedido(Pedidos pedido) { this.pedido = pedido; }
+
+    public Obras getObra() { return obra; }
+    public void setObra(Obras obra) { this.obra = obra; }
+
+    public int getCantidad() { return cantidad; }
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+
+    public float getPrecio() { return precio; }
+    public void setPrecio(float precio) { this.precio = precio; }
+}
+>>>>>>> 1709edb (FINAL COMMIT)
