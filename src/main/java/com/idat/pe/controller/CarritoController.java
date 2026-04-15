@@ -1,7 +1,7 @@
 package com.idat.pe.controller;
 
 import java.util.List;
-<<<<<<< HEAD
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idat.pe.model.Carrito;
-=======
+
 import java.util.Map;
 
 import javax.management.AttributeNotFoundException;
@@ -22,12 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.idat.pe.model.CarritoDetalle;
->>>>>>> 1709edb (FINAL COMMIT)
+
 import com.idat.pe.service.CarritoService;
 
 @RestController
 @RequestMapping("/api/carrito")
-<<<<<<< HEAD
+
 public class CarritoController {
 	
 		@Autowired
@@ -75,7 +75,7 @@ public class CarritoController {
 			return ResponseEntity.ok("LA COMPRA CON EL ID" + idCarrito + "HA SIDO ELIMINADO EXITOSAMENTE");
 		}
 }
-=======
+
 @CrossOrigin(origins = "*")
 public class CarritoController {
 
@@ -131,4 +131,4 @@ public class CarritoController {
         return ResponseEntity.noContent().build();
     }
 }
->>>>>>> 1709edb (FINAL COMMIT)
+
