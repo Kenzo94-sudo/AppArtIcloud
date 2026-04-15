@@ -19,18 +19,21 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "carrito")
 public class Carrito {
+		
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCarrito" )
-	private int idCarrito;
-	@ManyToOne
-	@JoinColumn(name = "idUsuario")
-	private Usuarios usuario;
-	@Column(name = "fechaRegistro")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@CreationTimestamp
-	private Date fechaCompra;
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "idCarrito")
+	    private int idCarrito;
 	
+	    @ManyToOne
+	    @JoinColumn(name = "idUsuario", nullable = false)
+	    private Usuarios usuario;
+	
+	    @Column(name = "fechaRegistro", updatable = false)
+	    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	    @CreationTimestamp
+	    private Date fechaCompra;
+		
 	public Carrito() {}
 
 	public Carrito(int idCarrito, Usuarios usuario, Date fechaCompra) {

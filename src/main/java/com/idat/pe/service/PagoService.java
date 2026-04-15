@@ -1,5 +1,7 @@
 package com.idat.pe.service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.management.AttributeNotFoundException;
@@ -7,11 +9,14 @@ import javax.management.AttributeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.idat.pe.DTO.PagoRequest;
 import com.idat.pe.model.MetodoPago;
-import com.idat.pe.model.Pago;
+import com.idat.pe.model.Pagos;
 import com.idat.pe.model.Pedidos;
 import com.idat.pe.model.Usuarios;
 import com.idat.pe.repository.PagoRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PagoService {
@@ -31,33 +36,34 @@ public class PagoService {
 		this.usuarioService = usuarioService;
 	}
 	
-	public Pago procesarPago(int idUsuario, Integer idPedido, MetodoPago metodoPago,
-			String estado) throws AttributeNotFoundException {
-		Usuarios usuarioPago = usuarioService.buscarPorId(idUsuario);
-		Pedidos pedidoPago = pedidoService.buscarPorId(idPedido);
-		if (pedidoPago.getUsuario().getId_usuario() != usuarioPago.getId_usuario()) {
-		    throw new RuntimeException("El pedido no pertenece al usuario indicado");
-		} 
-		
-		Pago pago = new Pago();
-		pago.setUsuario(usuarioPago);
-		pago.setPedido(pedidoPago);
-		pago.setPrecio(pedidoPago.getTotal());
-		pago.setMetodoPago(metodoPago);
-		pago.setEstado(estado);
-		
-		Pago saved = repository.save(pago);
-		return saved;
-	}
+	@Transactional
+    public void procesarPago(PagoRequest dto) throws AttributeNotFoundException {
+        // 1. Buscamos el pedido que se va a pagar
+        Pedidos pedido = pedidoService.buscarPorId(dto.getIdPedido());
+
+        // 2. Creamos el registro de pago (Entidad @Entity)
+        Pagos pago = new Pagos();
+        pago.setPedido(pedido);
+        pago.setMonto(dto.getMonto());
+        pago.setMetodoPago(dto.getMetodoPago());
+        pago.setFechaPago(LocalDateTime.now());
+
+        // 3. Guardamos el pago
+        repository.save(pago);
+
+        // 4. Actualizamos el estado del pedido
+        pedido.setEstado("PAGADO");
+        pedidoService.actualizar(pedido.getId_pedidos(), pedido);
+    }
 	
-	public Pago buscarPorId(int idPago) throws AttributeNotFoundException {
+	public Pagos buscarPorId(int idPago) throws AttributeNotFoundException {
 		return repository.findById(idPago).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado:" + idPago));
 	}
 	
-	public List<Pago> listarPorUsuario(int idUsuario){
+	public List<Pagos> listarPorUsuario(int idUsuario){
 		return repository.findByUsuario_idUsuario(idUsuario);}
 	
-	public Pago buscarPorPedido(int idPedido) throws AttributeNotFoundException {
+	public Pagos buscarPorPedido(int idPedido) throws AttributeNotFoundException {
 		return repository.findByPedido_idPedido(idPedido).orElseThrow(() -> new AttributeNotFoundException("Pago no encontrado para pedido:" + idPedido));
 		}
 	

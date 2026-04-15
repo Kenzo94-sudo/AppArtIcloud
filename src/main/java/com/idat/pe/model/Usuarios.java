@@ -1,7 +1,6 @@
 package com.idat.pe.model;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,16 +27,16 @@ public class Usuarios {
 	@Column(unique = true)
 	private String direccion;
 	@Column(unique = true)
-	private int telefono;
+	private String telefono;
 	@Column(name = "fechaRegistro")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
-	private Date fechaRegistro;
+	private LocalDateTime fechaRegistro;
 	
 	public Usuarios() {}
 
-	public Usuarios(int idUsuario, String nombre, String password, String email, String direccion, int telefono,
-			Date fechaRegistro) {
+	public Usuarios(int idUsuario, String nombre, String password, String email, String direccion, String telefono,
+			LocalDateTime fechaRegistro) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -88,19 +87,19 @@ public class Usuarios {
 		this.direccion = direccion;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public Date getfechaRegistro() {
+	public LocalDateTime getfechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setfechaRegistro(Date fechaRegistro) {
+	public void setfechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}	
 }

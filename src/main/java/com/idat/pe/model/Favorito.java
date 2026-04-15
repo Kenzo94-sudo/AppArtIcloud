@@ -14,27 +14,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+
 
 @Entity
-@Table(name = "favoritos",
-uniqueConstraints = @UniqueConstraint(columnNames = {"id_usuario", "id_obra"}))
+@Table(name = "favoritos")
 public class Favorito {
-
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "idFavorito")
-		private int idFavorito;
-		@ManyToOne
-		@JoinColumn(name = "idUsuario")
-		private Usuarios usuario;
-		@ManyToOne
-		@JoinColumn(name = "idObra")
-		private Obras obra;
-		@Column(name = "fechaRegistro")
-		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-		@CreationTimestamp
-		private Date fecha;
+			@Id
+		    @GeneratedValue(strategy = GenerationType.IDENTITY)
+		    @Column(name = "idFavorito")
+		    private int idFavorito;
+		
+		    @ManyToOne
+		    @JoinColumn(name = "idUsuario", nullable = false)
+		    private Usuarios usuario;
+		
+		    @ManyToOne
+		    @JoinColumn(name = "idObra", nullable = false)
+		    private Obras obra;
+		
+		    @Column(name = "fechaRegistro", updatable = false)
+		    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+		    @CreationTimestamp
+		    private Date fecha;
 		
 		public Favorito() {}
 
@@ -76,8 +77,6 @@ public class Favorito {
 
 		public void setFecha(java.util.Date fecha) {
 			this.fecha = fecha;
-		}
-		
-		
+		}		
 		
 }

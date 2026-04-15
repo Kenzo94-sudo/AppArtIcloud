@@ -62,7 +62,7 @@ public class ObraService {
 		obraActualizar.setPrecio(obraDatos.getPrecio());
 		obraActualizar.setStock(obraDatos.getStock());
 		obraActualizar.setImage_url(obraDatos.getImage_url());
-		obraActualizar.setFechaCreacion(obraDatos.getFechaCreacion());
+		obraActualizar.setfechaRegistro(obraDatos.getfechaRegistro());
 		obraActualizar.setDescripcion(obraDatos.getDescripcion());
 		return repository.save(obraActualizar);
 	}
@@ -72,6 +72,3 @@ public class ObraService {
 		repository.deleteById(idObra);	}
 	
 	}
-	
-	
-	

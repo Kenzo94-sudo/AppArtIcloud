@@ -1,6 +1,6 @@
 package com.idat.pe.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,33 +14,40 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "obras")
 public class Obras {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idObra")
-	private int idObra;
-	private String titulo;
-	@Column(columnDefinition = "TEXT")
-	private String descripcion;
-	private float precio;
-	private int stock;
-	private String image_url;
-	@Column(name = "fechaRegistro")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@CreationTimestamp
-	private Date fechaRegistro;
-	@ManyToOne
-	@JoinColumn(name = "idCategoria")
-	private Categorias categoria;
+
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "idObra")
+	    private int idObra;
+
+	    private String titulo;
+
+	    @Column(columnDefinition = "TEXT")
+	    private String descripcion;
+
+	    private float precio;
+
+	    private int stock;
+
+	    private String image_url;
+
+	    @Column(name = "fechaRegistro", updatable = false)
+	    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	    @CreationTimestamp
+	    private LocalDateTime fechaRegistro;
+
+	    @ManyToOne
+	    @JoinColumn(name = "idCategoria")
+	    private Categorias categoria;
 	
-	public Obras() {
-		
-	}
+	public Obras() {}
 
 	public Obras(int idObra, String titulo, String descripcion, float precio, int stock, String image_url,
-			Date fechaCreacion, Categorias categoria) {
+			LocalDateTime fechaRegistro, Categorias categoria) {
 		super();
 		this.idObra = idObra;
 		this.titulo = titulo;
@@ -48,7 +55,7 @@ public class Obras {
 		this.precio = precio;
 		this.stock = stock;
 		this.image_url = image_url;
-		this.fechaCreacion = fechaCreacion;
+		this.fechaRegistro = fechaRegistro;
 		this.categoria = categoria;
 	}
 
@@ -100,12 +107,12 @@ public class Obras {
 		this.image_url = image_url;
 	}
 
-	public java.util.Date getFechaCreacion() {
-		return fechaCreacion;
+	public LocalDateTime getfechaRegistro() {
+		return fechaRegistro;
 	}
 
-	public void setFechaCreacion(java.util.Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setfechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public Categorias getCategoria() {
@@ -115,5 +122,6 @@ public class Obras {
 	public void setCategoria(Categorias categoria) {
 		this.categoria = categoria;
 	}
+
 
 }

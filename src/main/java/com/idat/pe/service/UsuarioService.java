@@ -5,14 +5,16 @@ import java.util.Optional;
 
 import javax.management.AttributeNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.idat.pe.DTO.RegisterRequest;
 import com.idat.pe.model.Usuarios;
 import com.idat.pe.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-	
+	@Autowired
 	private final UsuarioRepository repository;
 	
 	public UsuarioService(UsuarioRepository repository) {
@@ -33,6 +35,17 @@ public class UsuarioService {
 	
 	public Usuarios guardarUsuario(Usuarios usuario) {
 		return repository.save(usuario);
+	}
+	
+	public Usuarios registrarNuevoUsuario(RegisterRequest dto) {
+
+	    Usuarios nuevoUsuario = new Usuarios();
+	    nuevoUsuario.setNombre(dto.getNombre());
+	    nuevoUsuario.setEmail(dto.getEmail()); 
+	    nuevoUsuario.setPassword(dto.getPassword());
+	    nuevoUsuario.setTelefono(dto.getTelefono());
+	    nuevoUsuario.setDireccion(dto.getDireccion());
+	    return repository.save(nuevoUsuario);
 	}
 	
 	public Usuarios actualizar(int idUsuario, Usuarios usuarioDatos) throws AttributeNotFoundException {

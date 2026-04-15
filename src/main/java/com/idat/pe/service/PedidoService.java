@@ -7,26 +7,34 @@ import javax.management.AttributeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.idat.pe.DTO.PedidoDetalleRequest;
+import com.idat.pe.DTO.PedidoRequest;
 import com.idat.pe.model.Obras;
+import com.idat.pe.model.PedidoDetalle;
 import com.idat.pe.model.Pedidos;
 import com.idat.pe.model.Usuarios;
+import com.idat.pe.repository.PedidosDetalleRepository;
 import com.idat.pe.repository.PedidosRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PedidoService {
 	@Autowired
-	private final PedidosRepository repository;
+	private final  PedidosRepository repository;
 	@Autowired
 	private final UsuarioService usuarioService;
 	@Autowired
 	private final ObraService obraService;
+	private PedidosDetalleRepository detalleRepository;
 	
 	public PedidoService(PedidosRepository repository, 
-			UsuarioService usuarioService, ObraService obraService)
+			UsuarioService usuarioService, ObraService obraService, PedidosDetalleRepository detalleRepository)
 	{
 		this.repository = repository;
 		this.usuarioService = usuarioService;
 		this.obraService = obraService;
+		this.detalleRepository = detalleRepository;
 	}
 	
 	public List<Pedidos> listar() { return repository.findAll();}
@@ -39,14 +47,41 @@ public class PedidoService {
 	public List<Pedidos> listarPorUsuario(int idUsuario){
 		return repository.findByUsuario_idUsuario(idUsuario);}
 	
-	public Pedidos crear(int idUsuario, int idObra) throws AttributeNotFoundException {
-		Usuarios usuario = usuarioService.buscarPorId(idUsuario);
-		Obras obra = obraService.buscarPorId(idObra);
-		Pedidos pedido = new Pedidos();
-		pedido.setUsuario(usuario);
-		pedido.setObra(obra);
-		pedido.setTotal(obra.getPrecio());
-		return repository.save(pedido);}
+	@Transactional
+	public Pedidos procesarPedidoCompleto(PedidoRequest dto) throws AttributeNotFoundException {
+	    // 1. Buscar al Usuario (Validación)
+	    Usuarios usuario = usuarioService.buscarPorId(dto.getIdUsuario());
+
+	    // 2. Crear la Cabecera del Pedido
+	    Pedidos nuevoPedido = new Pedidos();
+	    nuevoPedido.setUsuario(usuario);
+	    nuevoPedido.setTotal(dto.getTotal());
+	    nuevoPedido.setEstado("PAGADO");
+	    nuevoPedido.setFechaPedido(java.time.LocalDateTime.now());
+
+	    // 3. GUARDAR CABECERA: Aquí obtenemos el ID autoincremental
+	    Pedidos pedidoGuardado = repository.save(nuevoPedido);
+
+	    // 4. GUARDAR DETALLES: Recorremos la lista que viene de Android
+	    for (PedidoDetalleRequest itemDto : dto.getDetalle()) {
+	        PedidoDetalle detalle = new PedidoDetalle();
+	        
+	        // Vinculamos el detalle con el pedido que acabamos de guardar
+	        detalle.setPedido(pedidoGuardado); 
+	        
+	        // Buscamos la obra por ID
+	        Obras obra = obraService.buscarPorId(itemDto.getIdObra());
+	        detalle.setObra(obra);
+	        
+	        detalle.setCantidad(itemDto.getCantidad());
+	        detalle.setPrecio(itemDto.getPrecio());
+
+	        // Guardamos el detalle (necesitarás inyectar DetalleRepository)
+	        detalleRepository.save(detalle);
+	    }
+
+	    return pedidoGuardado;
+	}
 	
 	public Pedidos actualizar(int idPedido, Pedidos pedidoDatos) throws AttributeNotFoundException {
 		Pedidos pedidoActualizar = buscarPorId(idPedido);

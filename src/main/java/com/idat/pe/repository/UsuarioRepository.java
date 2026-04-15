@@ -8,6 +8,7 @@ import com.idat.pe.model.Usuarios;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuarios, Integer>{
-	Optional<Usuarios> findByEmail(String email);
-	boolean existsByEmail(String email);
+	
+    Optional<Usuarios> findByEmail(String email);
+    boolean existsByEmail(String email);
 }

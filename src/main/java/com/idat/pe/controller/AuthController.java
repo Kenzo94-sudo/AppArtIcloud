@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.idat.pe.config.JwtUtil;
-import com.idat.pe.model.LoginRequest;
 import com.idat.pe.model.Usuarios;
 import com.idat.pe.service.UsuarioService;
 
@@ -24,7 +23,7 @@ public class AuthController {
 	private JwtUtil jwtUtil;
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request){
+	public ResponseEntity<?> login(@RequestBody com.idat.pe.DTO.LoginRequest request){
 		
 		//Validar credenciales
 		Usuarios usuario = service.autenticar(request.getEmail(), request.getPassword());

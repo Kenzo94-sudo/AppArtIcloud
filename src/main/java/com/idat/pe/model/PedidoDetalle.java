@@ -6,30 +6,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "pedidoDetalle")
+@Table(name = "pedido_detalle")
 public class PedidoDetalle {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int idPedidoDetalle;
-	@OneToOne
-	@JoinColumn(name = "idPedido")
-	private Pedidos pedido;
-	@OneToOne
-	@JoinColumn(name = "idObra")
-	private Obras obra;
-	private int cantidad;
-	private float precio;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_detalle")
+    private int idDetalle;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pedido", nullable = false)
+    private Pedidos pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "id_obra", nullable = false)
+    private Obras obra;
+
+    private int cantidad;
+    private double precio;
 	
 	public PedidoDetalle() {}
 
-	public PedidoDetalle(int idPedidoDetalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
+	public PedidoDetalle(int idDetalle, Pedidos pedido, Obras obra, int cantidad, float precio) {
 		super();
-		this.idPedidoDetalle = idPedidoDetalle;
+		this.idDetalle = idDetalle;
 		this.pedido = pedido;
 		this.obra = obra;
 		this.cantidad = cantidad;
@@ -37,11 +41,11 @@ public class PedidoDetalle {
 	}
 
 	public int getId_detalle() {
-		return idPedidoDetalle;
+		return idDetalle;
 	}
 
-	public void setId_detalle(int idPedidoDetalle) {
-		this.idPedidoDetalle = idPedidoDetalle;
+	public void setId_detalle(int idDetalle) {
+		this.idDetalle = idDetalle;
 	}
 
 	public Pedidos getPedido() {
@@ -68,12 +72,12 @@ public class PedidoDetalle {
 		this.cantidad = cantidad;
 	}
 
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
-		this.precio = precio;
+	public void setPrecio(double d) {
+		this.precio = d;
 	}
 	
 	

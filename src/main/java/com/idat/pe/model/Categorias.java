@@ -10,13 +10,16 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "categorias")
 public class Categorias {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCategoria")
-	private Integer idCategoria;
-	private String nombre;
-	@Column(columnDefinition = "TEXT")
-	private String descripcion;
+		@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "idCategoria")
+	    private Integer idCategoria;
+	
+	    @Column(nullable = false, length = 100)
+	    private String nombre;
+	
+	    @Column(columnDefinition = "TEXT")
+	    private String descripcion;
 		
 		public Categorias() {}
 
