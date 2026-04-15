@@ -26,56 +26,7 @@ import com.idat.pe.model.CarritoDetalle;
 import com.idat.pe.service.CarritoService;
 
 @RestController
-@RequestMapping("/api/carrito")
-
-public class CarritoController {
-	
-		@Autowired
-		private CarritoService service;
-		
-		@GetMapping("/listar")
-		public List<Carrito> listar()
-		{
-			return service.listar();
-		}
-		
-		@GetMapping("/listar/{idCarrito}")
-		public ResponseEntity<Carrito> listarPorId(@PathVariable int idCarrito)
-		{
-			Carrito buscarIdCarrito = service.buscarPorId(idCarrito);
-			return ResponseEntity.ok(buscarIdCarrito);
-		}
-		
-		@GetMapping("/listar/{idUsuario}")
-		public ResponseEntity<Carrito> listarPorUsuario(@PathVariable int idUsuario)
-		{
-			Carrito buscarUsuario = service.buscarPorUsuario(idUsuario);
-			return ResponseEntity.ok(buscarUsuario);
-		}
-		
-		@GetMapping("/listar/carrito/{idUsuario}")
-		public ResponseEntity<Carrito> obtener(@PathVariable int idUsuario)
-		{
-			return ResponseEntity.ok(service.obtenerOCrear(idUsuario));
-		}
-		
-		
-		@PostMapping("/guardar")
-		public ResponseEntity<Carrito> guardar(@PathVariable Carrito carrito)
-		{
-			Carrito guardarCarrito = service.guardarCompra(carrito);
-			return ResponseEntity.ok(guardarCarrito);
-		}
-		
-		
-		@DeleteMapping("/eliminar/{idCarrito}")
-		public ResponseEntity<String> eliminar(int idCarrito)
-		{
-			service.eliminar(idCarrito);
-			return ResponseEntity.ok("LA COMPRA CON EL ID" + idCarrito + "HA SIDO ELIMINADO EXITOSAMENTE");
-		}
-}
-
+@RequestMaping("/carrito")
 @CrossOrigin(origins = "*")
 public class CarritoController {
 
